@@ -128,7 +128,7 @@ uniform float fogDensity;
 
 ### Fog color
 
-The current color of the fog.
+The current color of the fog. Corresponds to the current value of `glGetFloatv(GL_FOG_COLOR)`.
 
 Each color channel has a float value of 0.0 to 1.0, corresponding to RGB values from 0 to 255. Note that the values are encoded in the non-linear sRGB color space: to receive linear RGB values, apply the function `pow(x, 2.4)` as described [on Wikipedia](https://en.wikipedia.org/wiki/SRGB#The_reverse_transformation).
 
@@ -139,6 +139,27 @@ Each color channel has a float value of 0.0 to 1.0, corresponding to RGB values 
 
 ```glsl
 uniform vec3 fogColor;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Sky / clear color
+
+The current color of the sky. Corresponds to the current value of `glGetFloatv(GL_COLOR_CLEAR_VALUE)` or the value passed to `glClearColor`.
+
+Each color channel has a float value of 0.0 to 1.0, corresponding to RGB values from 0 to 255. Note that the values are encoded in the non-linear sRGB color space: to receive linear RGB values, apply the function `pow(x, 2.4)` as described [on Wikipedia](https://en.wikipedia.org/wiki/SRGB#The_reverse_transformation).
+
+> TODO:
+> * Make sure that the values are actually sRGB!
+
+#### Declaration
+
+```glsl
+uniform vec3 skyColor;
 ```
 
 #### Implementation Support
