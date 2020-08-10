@@ -168,6 +168,8 @@ uniform vec3 skyColor;
 * ✔️ OptiFine
 
 
+## World time
+
 ### Current world day time
 
 Represents the current time of day, in ticks, ranging from 0 to 23999 (inclusive), corresponding to the Minecraft [daylight cycle](https://minecraft.gamepedia.com/Daylight_cycle). This is the value of the DayTime property as stored in `level.dat`, modulo 24000.
@@ -182,3 +184,20 @@ uniform int worldTime;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+### Current world day
+
+Represents the current day of the world. As opposed to the time of day, this is the number of the current day: 0 for the first day, 1 for the second day, and so on. This is the value of the DayTime property as stored in `level.dat`, divided by 24000.
+
+#### Declaration
+
+```glsl
+uniform int worldDay;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+
