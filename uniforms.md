@@ -2,6 +2,8 @@
 
 ShadersMod & OptiFine define many uniforms that allow shaders to access the current state of the world, the player, and the renderer.
 
+Note: Some of these uniforms are not supported by ShadersMod. They will take on an initial/default value of `0`, per the OpenGL Specification.
+
 ## Player
 
 ### Held item ID
@@ -74,3 +76,33 @@ uniform int heldBlockLightValue2;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+
+
+## Sky and fog
+
+### OpenGL fog mode
+
+Holds the current OpenGL fog mode, or 0 if there is no fog. This is equivalent to the value of `glGetInteger(GL_FOG_MODE)`.
+
+The following values are valid:
+
+| Name      | Decimal | Hex    |
+| --------- | ------- | -------|
+| GL_LINEAR | 9279    | 0x2601 |
+| GL_EXP    | 2048    | 0x0800 |
+| GL_EXP2   | 2049    | 0x0801 |
+
+For more information on fog modes, see the [official OpenGL documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glFog.xml#description).
+
+
+#### Declaration
+
+```glsl
+uniform int fogMode;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
