@@ -106,3 +106,42 @@ uniform int fogMode;
 * ✔️ ShadersMod
 * ✔️ OptiFine
 
+
+### Fog density
+
+The current fog density. Ranges from 0.0 to 1.0.
+
+> TODO:
+> * Find out more about this value
+
+#### Declaration
+
+```glsl
+uniform float fogDensity;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+
+
+### Fog color
+
+The current color of the fog.
+
+Each color channel has a float value of 0.0 to 1.0, corresponding to RGB values from 0 to 255. Note that the values are encoded in the non-linear sRGB color space: to receive linear RGB values, apply the function `pow(x, 2.4)` as described [on Wikipedia](https://en.wikipedia.org/wiki/SRGB#The_reverse_transformation).
+
+> TODO:
+> * Make sure that the values are actually sRGB!
+
+#### Declaration
+
+```glsl
+uniform vec3 fogColor;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
