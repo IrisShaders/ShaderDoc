@@ -225,3 +225,21 @@ uniform int moonPhase;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Frame time
+
+### Frame counter
+
+An arbitrary frame index, ranging from 0 to 720719 (inclusive). Once this counter reaches 720719, it will reset to 0 on the next frame. At 60 FPS, this counter will reset approximately every 3 hours and 20 minutes.
+
+#### Declaration
+
+```glsl
+uniform int frameCounter;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
