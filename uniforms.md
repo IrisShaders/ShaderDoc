@@ -227,7 +227,7 @@ uniform int moonPhase;
 * ✔️ OptiFine
 
 
-## Frame time
+## System time
 
 ### Frame counter
 
@@ -242,4 +242,41 @@ uniform int frameCounter;
 #### Implementation Support
 
 * ❌ ShadersMod
+* ✔️ OptiFine
+
+
+### Frame time
+
+The time that the last frame took to render, in seconds.
+
+> TODO:
+> * What is the resolution of this value? Presumably milliseconds.
+
+#### Declaration
+
+```glsl
+uniform float frameTime;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+
+
+### Frame time counter
+
+An indicator of the run time, in seconds. Starts at 0.0 on the first frame, and on each frame is updated according to the system time. Has a resolution of 1 millisecond (0.001).
+
+On OptiFine, this counter resets every hour (3600 seconds), while on ShadersMod, it resets every 100000 seconds.
+
+#### Declaration
+
+```glsl
+uniform float frameTimeCounter;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
 * ✔️ OptiFine
