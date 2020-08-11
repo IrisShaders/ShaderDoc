@@ -280,3 +280,44 @@ uniform float frameTimeCounter;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Celestial bodies
+
+### Sun angle
+
+A float, ranging from 0.0 to 1.0, that represents the current angle of the sun (and, also, moon) in the sky. To get the angle in radians, multiply by 2π, and to get the angle in degrees, multiply by 360.0.
+
+A value of 0.0 represents the sun directly on the east horizon and the moon on the west horizon, 0.25 represents the sun directly above, 0.5 represents the sun at the west horizon and the moon on the east horizon, and 0.75 represents the moon directly above.
+
+For the purposes of determining the angle of the celestial body in the sky that is currently casting a shadow, it's recommended to use the [shadow angle](#shadow-angle) instead.
+
+#### Declaration
+
+```glsl
+uniform float sunAngle;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Shadow angle
+
+The angle in the sky of the current shadow-casting celestial body. During the day, this is the sun angle, and during the night, this is the moon angle (sun angle - 0.5). Thus, this value has a range of 0.0 to 0.5, inclusive. At a sun angle of 0.5, the shadow angle will be 0.5, and on the next tick, it will reset.
+
+> TODO:
+> * The OptiFine documentation states that this value has a range of 0.0-1.0, not 0.0-0.5. Is this a documentation error, or a difference between ShadersMod and OptiFine?
+
+#### Declaration
+
+```glsl
+uniform float shadowAngle;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
