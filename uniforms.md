@@ -201,3 +201,27 @@ uniform int worldDay;
 * ❌ ShadersMod
 * ✔️ OptiFine
 
+
+### Moon phase
+
+Holds the current moon phase, ranging from 0 to 7 (inclusive). Normally this is equivalent to `worldDay % 8`, however, custom (modded) dimensions may define their own moon phase values. The actual appearance of the moon at each phase is in the same order that the [Minecraft Wiki](https://minecraft.gamepedia.com/Moon#Phases) depicts them:
+
+0. Full moon
+1. Waning gibbous
+2. Third quarter
+3. Waning crescent
+4. New moon
+5. Waxing crescent
+6. First quarter
+7. Waxing gibbous
+
+#### Declaration
+
+```glsl
+uniform int moonPhase;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
