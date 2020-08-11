@@ -343,3 +343,55 @@ uniform float rainStrength;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Viewport
+
+These uniforms refer to properties of the rendering viewport / framebuffer, not the window itself. Though the window and viewport are often the same size, it's possible to modify the rendering resolution multiplier in the Shaders configuration. With a multiplier of 0.5x, for example, the width and height of the viewport will be half of the width and height of the window.
+
+### Viewport width
+
+The width of the viewport. This is the width of the color & depth framebuffers (colortex0-7 and depthtex0-2). Even though this is a float, it should always have a value that is a positive integer.
+
+#### Declaration
+
+```glsl
+uniform float viewWidth;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Viewport height
+
+The height of the viewport. This is the height of the color & depth framebuffers (colortex0-7 and depthtex0-2). Even though this is a float, it should always have a value that is a positive integer.
+
+#### Declaration
+
+```glsl
+uniform float viewHeight;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Aspect ratio
+
+The aspect ratio of the viewport. This is the aspect ratio of the color & depth framebuffers (colortex0-7 and depthtex0-2). This is equivalent to `viewWidth / viewHeight`. 
+
+#### Declaration
+
+```glsl
+uniform float aspectRatio;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
