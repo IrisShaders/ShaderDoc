@@ -395,3 +395,41 @@ uniform float aspectRatio;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Camera
+
+### Near viewing plane
+
+This uniform should always have a value of `0.05`. See the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft for confirmation.
+
+> TODO: Check OptiFine behavior
+
+#### Declaration
+
+```glsl
+uniform float near;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Far viewing plane
+
+ShadersMod sets this value to the render distance in blocks / meters. However, note that the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft actually sets the far plane to the render distance in blocks times the square root of 2.
+
+> TODO: Check OptiFine behavior
+
+#### Declaration
+
+```glsl
+uniform float far;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
