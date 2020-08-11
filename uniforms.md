@@ -321,3 +321,25 @@ uniform float shadowAngle;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Weather
+
+### Rain strength
+
+A value from 0.0 to 1.0 representing the current strength of the rain. A value of 0.0 indicates no rain at all, while a value of 1.0 indicates full rain. Values from 0.0 to 0.2 indicate that no rain is falling, but that rainy weather exists.
+
+For every tick that the world exists in a state of rainy weather, the strength increases by 0.01, up to 1.0. For every tick that rainy weather does not exist, the strength decreases by 0.01, down to 0.0. Thus, transitions to and from rainy weather take 5 seconds (100 ticks).
+
+The [wetness](#wetness) value, calculated based on the rain strength, provides a smoother and more delayed transition between dry and wet states.
+
+#### Declaration
+
+```glsl
+uniform float rainStrength;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
