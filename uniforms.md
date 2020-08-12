@@ -507,3 +507,41 @@ uniform float far;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+### Camera position
+
+The position of the player, in world (pre-transformed) space. World space refers to coordinates that have not yet been transformed.
+
+Note: In 1.13 and below this uniform actually holds the position of the player's feet (not eyes) due to [a Minecraft quirk](https://twitter.com/Dinnerbone/status/1099982036339748865).
+
+OptiFine appears to do some sort of transformation to keep the camera coordinates within the range of (-1000, 1000). It's uncertain what effect this transformation has on shader behavior.
+
+#### Declaration
+
+```glsl
+uniform vec3 cameraPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Previous camera position
+
+This is the value of [camera position](#camera-position) from the previous frame. If this is the first frame, then this uniform will have a value of (0.0, 0.0, 0.0).
+
+Subtracting this from the camera position gives a motion vector, which is a good start for a motion blur effect.
+
+#### Declaration
+
+```glsl
+uniform vec3 previousCameraPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
