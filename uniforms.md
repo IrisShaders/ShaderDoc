@@ -112,10 +112,11 @@ uniform int fogMode;
 
 ### Fog density
 
-The current fog density. Ranges from 0.0 to 1.0.
+The current fog density. This is equivalent to the value of `glGetFloat(GL_FOG_DENSITY)`. If fog is disabled, the value of this uniform is 0.0. Note that, for the purposes of computing fog in shaders, fog density is only a factor within the GL_EXP or GL_EXP2 fog formulas, it is not used for the standard GL_LINEAR fog formula. See the [official Khronos documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glFog.xml#description) for more information.
 
-> TODO:
-> * Find out more about this value
+The OptiFine documentation states that the range of this value is 0.0 to 1.0, but the OpenGL documentation has no such limit. In fact, Minecraft itself sets a fog density of 2.0 while within lava.
+
+> TODO: This is just an educated guess... I haven't totally verified this with the GlStateManager patch since OptiFine-patched Minecraft code is hard to inspect. It was added to the documentation [in September 2018](https://github.com/sp614x/optifine/commit/2cd5599515677870b7a2da3d5fad32493aa7e9af#diff-1fcc39837306898ce7f1f891ffb5cb62).
 
 #### Declaration
 
