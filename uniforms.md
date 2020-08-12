@@ -10,13 +10,11 @@ Note: Some of these uniforms are not supported by ShadersMod. They will take on 
 
 Item ID of the item currently held in the main hand. 
 
-For OptiFine, the item ID is defined by the mapping in `items.properties`.
-
-> TODO
-> * OptiFine: What about when nothing is held? (probably air)
-> * OptiFine: What about when the currently held item isn't defined in `items.properties`?
+For OptiFine, the item ID is defined by the mapping in `items.properties`. If nothing / air is held, or if the item does not exist in `items.properties`, this uniform will be set to `-1`.
 
 For ShadersMod, which does not support `item.properties`, the ID is defined by the Anvil (pre-1.13 world format) ID mapping of the currently held item. If the player is currently not holding an item, an ID of `-1` is provided. For example, if the player was holding a stone block, the value would be `1`.
+
+If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldItemId2`.
 
 #### Declaration
 
@@ -32,14 +30,13 @@ uniform int heldItemId;
 
 ### Held block light value
 
-Light value of the block that the player is currently holding in their hand.
+Light value of the block that the player is currently holding in their hand. The light value is determined by the block's luminance / lightValue property, as documented on the [Minecraft Wiki](https://minecraft.gamepedia.com/Light#Light-emitting_blocks).
 
-> TODO:
-> * For OptiFine, the exact behavior is unknown. It's probably similar to ShadersMod.
-
-For ShadersMod, the light value, ranging from 0 (no light) to 15 (brightest), of the block's default block state is provided. If the player is not currently holding an item, or the currently held item is not a block, a value of 0 is provided.
+The light value, ranging from 0 (no light) to 15 (brightest), of the block's default block state is provided. If the player is not currently holding an item in their main hand, or the currently held item is not a block, a value of 0 is provided.
 
 For example, if the player is currently holding a block of Glowstone, a value of 15 will be provided, but if they are holding a block of Stone, a value of 0 will be provided.
+
+If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldBlockLightValue2`.
 
 #### Declaration
 
@@ -253,10 +250,7 @@ uniform int frameCounter;
 
 ### Frame time
 
-The time that the last frame took to render, in seconds.
-
-> TODO:
-> * What is the resolution of this value? Presumably milliseconds.
+The time that the last frame took to render, in seconds. If this is the first frame, then the value of this uniform is 0.0. Has a resolution of 1 millisecond (0.001).
 
 #### Declaration
 
@@ -350,8 +344,7 @@ uniform vec3 moonPosition;
 
 The angle in the sky of the current shadow-casting celestial body. During the day, this is the sun angle, and during the night, this is the moon angle (sun angle - 0.5). Thus, this value has a range of 0.0 to 0.5, inclusive. At a sun angle of 0.5, the shadow angle will be 0.5, and on the next tick, it will reset.
 
-> TODO:
-> * The OptiFine documentation states that this value has a range of 0.0-1.0, not 0.0-0.5. Is this a documentation error, or a difference between ShadersMod and OptiFine?
+The OptiFine documentation states that this value has a range of 0.0-1.0, not 0.0-0.5. This appears to be a documentation error, as the OptiFine behavior matches the ShadersMod behavior exactly here.
 
 #### Declaration
 
@@ -475,9 +468,7 @@ uniform float aspectRatio;
 
 ### Near viewing plane
 
-This uniform should always have a value of `0.05`. See the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft for confirmation.
-
-> TODO: Check OptiFine behavior
+Both ShadersMod and OptiFine unconditionally set this value to `0.05`, to match the near plane of Minecraft's camera. See the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft for confirmation.
 
 #### Declaration
 
@@ -493,9 +484,9 @@ uniform float near;
 
 ### Far viewing plane
 
-ShadersMod sets this value to the render distance in blocks / meters. However, note that the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft actually sets the far plane to the render distance in blocks times the square root of 2.
+ShadersMod and OptiFine set this value to the render distance in blocks / meters. 
 
-> TODO: Check OptiFine behavior
+However, the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft actually sets the far plane to the render distance in blocks times the square root of 2.
 
 #### Declaration
 
@@ -516,6 +507,9 @@ The position of the player, in world (pre-transformed) space. World space refers
 Note: In 1.13 and below this uniform actually holds the position of the player's feet (not eyes) due to [a Minecraft quirk](https://twitter.com/Dinnerbone/status/1099982036339748865).
 
 OptiFine appears to do some sort of transformation to keep the camera coordinates within the range of (-1000, 1000). It's uncertain what effect this transformation has on shader behavior.
+
+> TODO:
+> * Look into the OptiFine camera offset transformation
 
 #### Declaration
 
