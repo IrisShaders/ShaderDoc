@@ -304,6 +304,42 @@ uniform float sunAngle;
 * ✔️ OptiFine
 
 
+### Sun position
+
+Holds the sun position in "eye space" - the result of transforming the vector (0, 100, 0) by the celestial modelview matrix. In other words, this is the position of the sun, rotated along its path.
+
+Minecraft note: the celestial modelview matrix refers to the content of the modelview matrix right before the sun and moon are rendered.
+
+#### Declaration
+
+```glsl
+uniform vec3 sunPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Moon position
+
+Holds the moon position in "eye space" - the result of transforming the vector (0, -100, 0) by the celestial modelview matrix. In other words, this is the position of the moon, rotated along its path.
+
+Minecraft note: the celestial modelview matrix refers to the content of the modelview matrix right before the sun and moon are rendered.
+
+#### Declaration
+
+```glsl
+uniform vec3 moonPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
 ### Shadow angle
 
 The angle in the sky of the current shadow-casting celestial body. During the day, this is the sun angle, and during the night, this is the moon angle (sun angle - 0.5). Thus, this value has a range of 0.0 to 0.5, inclusive. At a sun angle of 0.5, the shadow angle will be 0.5, and on the next tick, it will reset.
