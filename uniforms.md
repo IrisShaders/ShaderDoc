@@ -540,3 +540,54 @@ uniform vec3 previousCameraPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+
+
+## Matrices
+
+### Model view matrix
+
+The state of the model view matrix immediately after setting up the camera and applying the camera transformations, and immediately before the actual rendering of the world starts.
+
+#### Declaration
+
+```glsl
+uniform mat4 gbufferModelView;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Inverted model view matrix
+
+The inverse form of `gbufferModelView`.
+
+#### Declaration
+
+```glsl
+uniform mat4 gbufferModelViewInverse;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
+### Previous model view matrix
+
+The value of `gbufferModelView` from the previous frame. If this is the first frame, then this matrix will be filled with zeroes.
+
+#### Declaration
+
+```glsl
+uniform mat4 gbufferPreviousModelView;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
