@@ -47,6 +47,12 @@ For example, if the player is currently holding a block of Glowstone, a value of
 uniform int heldBlockLightValue;
 ```
 
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
 ### Held item ID (off hand)
 
 This is the same as the main [Held item ID](#held-item-id), but instead referring to the off hand (most commonly the left hand).
