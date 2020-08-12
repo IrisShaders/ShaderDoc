@@ -359,6 +359,22 @@ uniform float shadowAngle;
 * ✔️ OptiFine
 
 
+### Shadow light position
+
+The position of the celestial body that is currently casting shadows on the world. When `sunAngle ≤ 0.5`, this is equal to `sunPosition`, and when `sunAngle > 0.5`, this is equal to `moonPosition`.
+
+#### Declaration
+
+```glsl
+uniform vec3 shadowLightPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
 ## Weather
 
 ### Rain strength
