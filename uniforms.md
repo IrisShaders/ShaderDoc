@@ -375,6 +375,22 @@ uniform vec3 shadowLightPosition;
 * ✔️ OptiFine
 
 
+### Up position
+
+An upwards vector of length 100. The value of this uniform is equal to the value of `sunPosition` at midday (6000 ticks), or, alternatively, `moonPosition` at midnight (18000 ticks). The value of this uniform is independent of the current in-game time, unlike the other celestial position values.
+
+#### Declaration
+
+```glsl
+uniform vec3 upPosition;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+
+
 ## Weather
 
 ### Rain strength
