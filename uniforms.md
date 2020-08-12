@@ -14,7 +14,7 @@ For OptiFine, the item ID is defined by the mapping in `items.properties`. If no
 
 For ShadersMod, which does not support `item.properties`, the ID is defined by the Anvil (pre-1.13 world format) ID mapping of the currently held item. If the player is currently not holding an item, an ID of `-1` is provided. For example, if the player was holding a stone block, the value would be `1`.
 
-If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldItemId2`.
+If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldItemId2`. This is to support older (pre-1.9 or non-OptiFine) shader packs that do not support the off hand.
 
 #### Declaration
 
@@ -36,7 +36,7 @@ The light value, ranging from 0 (no light) to 15 (brightest), of the block's def
 
 For example, if the player is currently holding a block of Glowstone, a value of 15 will be provided, but if they are holding a block of Stone, a value of 0 will be provided.
 
-If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldBlockLightValue2`.
+If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldBlockLightValue2`. This is to support older (pre-1.9 or non-OptiFine) shader packs that do not support the off hand.
 
 #### Declaration
 
