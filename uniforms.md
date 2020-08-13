@@ -12,7 +12,7 @@ Item ID of the item currently held in the main hand.
 
 For OptiFine, the item ID is defined by the mapping in `items.properties`. If nothing / air is held, or if the item does not exist in `items.properties`, this uniform will be set to `-1`.
 
-For ShadersMod, which does not support `item.properties`, the ID is defined by the Anvil (pre-1.13 world format) ID mapping of the currently held item. If the player is currently not holding an item, an ID of `-1` is provided. For example, if the player was holding a stone block, the value would be `1`.
+For ShadersMod, which does not support `item.properties`, the ID is defined by the Anvil (pre-1.13 world format) ID mapping of the currently held item. If the player is currently not holding an item, an ID of `0` is provided. The code is intended to provide a value of `-1`, but due to an internal Minecraft change that makes ItemStacks always be non-null, it returns the item ID of air (`0`). For example, if the player was holding a stone block, the value would be `1`.
 
 If the "Old Hand Lighting" option is set, and the light value of the block in the off hand is higher than the light value of the block in the main hand, then this uniform takes on the value of `heldItemId2`. This is to support older (pre-1.9 or non-OptiFine) shader packs that do not support the off hand.
 
