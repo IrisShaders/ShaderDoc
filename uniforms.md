@@ -157,6 +157,8 @@ uniform vec3 fogColor;
 
 The current color of the sky. Corresponds to the current value of `glGetFloatv(GL_COLOR_CLEAR_VALUE)` or the value passed to `glClearColor`.
 
+> TODO: This doesn't appear to match the OpenGL state in actuality
+
 Each color channel has a float value of 0.0 to 1.0, corresponding to RGB values from 0 to 255. Note that the values are encoded in the non-linear sRGB color space: to receive linear RGB values, apply the function `pow(x, 2.4)` as described [on Wikipedia](https://en.wikipedia.org/wiki/SRGB#The_reverse_transformation).
 
 > TODO:
@@ -293,7 +295,19 @@ A float, ranging from 0.0 to 1.0, that represents the current angle of the sun (
 
 A value of 0.0 represents the sun directly on the east horizon and the moon on the west horizon, 0.25 represents the sun directly above, 0.5 represents the sun at the west horizon and the moon on the east horizon, and 0.75 represents the moon directly above.
 
+To calculate this value from Minecraft's celestial angle, which has 0.0 representing midday, use the following code:
+
+```java
+if (celestialAngle < 0.75F) {
+	sunAngle = celestialAngle + 0.25F;
+} else {
+	sunAngle = celestialAngle - 0.75F;
+}
+```
+
 For the purposes of determining the angle of the celestial body in the sky that is currently casting a shadow, it's recommended to use the [shadow angle](#shadow-angle) instead.
+
+Note: The value is unspecified if the shaderpack does not use a shadow map. It will keep its value from the last time a shadow map was rendered, or, if no shadow map has been rendered this play session, it will have a default value of 0.0.
 
 #### Declaration
 
