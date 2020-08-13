@@ -87,6 +87,8 @@ uniform int heldBlockLightValue2;
 
 Holds the current OpenGL fog mode, or 0 if there is no fog. This is equivalent to the value of `glGetInteger(GL_FOG_MODE)`.
 
+> TODO: After testing, it actually isn't equivalent. Is this a ShadersMod bug?
+
 The following values are valid:
 
 | Name      | Decimal | Hex    |
