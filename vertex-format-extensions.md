@@ -90,7 +90,7 @@ v0 --------- v3
 v1 --------- v2
 ```
 
-Here is a simple expansion of the [LearnOpenGL algorithm](https://github.com/JoeyDeVries/LearnOpenGL/blob/443f16db600ffb62ecfa244a8638819a39335952/src/5.advanced_lighting/4.normal_mapping/normal_mapping.cpp#L178-L193) for the first triangle of the quad `(v10, v1, v2)`:
+Here is a simple expansion of the [LearnOpenGL algorithm](https://github.com/JoeyDeVries/LearnOpenGL/blob/443f16db600ffb62ecfa244a8638819a39335952/src/5.advanced_lighting/4.normal_mapping/normal_mapping.cpp#L178-L193) for the first triangle of the quad `(v0, v1, v2)`:
 
 ```java
 Vector3f edge1 = v1.xyz - v0.xyz;
@@ -127,7 +127,18 @@ If the dot product is negative, the `w` value of tangent is set to `-1`. Otherwi
 
 ## Center texture coordinate
 
-TODO: Document this
+TODO: Overview
+
+### Declaration
+
+```glsl
+attribute vec2 mc_midTexCoord;
+```
+
+
+### Algorithm
+
+For each quad, the center texture coordinate is just the average of the texture coordinate for each vertex. That is, `mc_midTexCoord.x` is the average of all of the `x` / `u` values, and `mc_midTexCoord.y` is the average of all of the `y` / `v` values. It's as simple as that!
 
 
 ## Block identification
