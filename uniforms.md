@@ -80,6 +80,21 @@ uniform int heldBlockLightValue2;
 * ❌ ShadersMod
 * ✔️ OptiFine
 
+### playerMood
+
+player mood is a float that is in the range of (0.0-1.0), it increases the longer a player stays underground.
+
+#### Declaration
+
+```glsl
+uniform float playerMood;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+
 
 ## Sky and fog
 
