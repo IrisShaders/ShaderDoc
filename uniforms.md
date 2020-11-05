@@ -80,9 +80,11 @@ uniform int heldBlockLightValue2;
 * ❌ ShadersMod
 * ✔️ OptiFine
 
-### playerMood
+### Player Mood
 
-player mood is a float that is in the range of (0.0-1.0), it increases the longer a player stays underground.
+Player Mood is a float that is in the range of (0.0-1.0), it increases the longer a player stays underground.
+It's value in percentage can be viewed in the debug screen(F3).
+https://minecraft.gamepedia.com/Ambience#Cave_ambience
 
 #### Declaration
 
