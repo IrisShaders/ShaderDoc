@@ -82,9 +82,11 @@ uniform int heldBlockLightValue2;
 
 ### Player Mood
 
-Player Mood is a float that is in the range of (0.0-1.0), it increases the longer a player stays underground.
-It's value in percentage can be viewed in the debug screen(F3).
-https://minecraft.gamepedia.com/Ambience#Cave_ambience
+The [Minecraft Wiki](https://minecraft.gamepedia.com/Ambience#Cave_ambience) has documented this value:
+
+> Cave ambience occurs based on a "mood" percent value between 0–100. The mood increases when the player is underground and/or in dark place, and decreases otherwise. When the mood reaches 100%, one of the sounds plays randomly, resetting the mood to 0% and thus restarting the cycle. The deeper the player is and the darker it is, the quicker the mood increases. Mood and its current value can be seen in the debug screen.
+
+In this case, 100% corresponds to a float value of 1.0, 0% corresponds to a value of 0.0, and so on.
 
 #### Declaration
 
@@ -623,4 +625,3 @@ uniform mat4 gbufferPreviousModelView;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-
