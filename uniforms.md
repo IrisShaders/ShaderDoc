@@ -80,7 +80,7 @@ uniform int heldBlockLightValue2;
 * ❌ ShadersMod
 * ✔️ OptiFine
 
-### Player Mood
+### Player mood
 
 The [Minecraft Wiki](https://minecraft.gamepedia.com/Ambience#Cave_ambience) has documented this value:
 
