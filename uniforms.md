@@ -107,6 +107,119 @@ uniform float playerMood;
 * ❌ Iris
 
 
+### Blindness
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float blindness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
+### Night Vision
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float nightVision;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Screen Brightness
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float screenBrightness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+## Common
+
+### Eye Altitude
+Position of the eyes
+#### Declaration
+
+```glsl
+uniform float eyeAltitude;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
+### Eye Brightness
+Block brightness in x, sky brightness in y
+#### Declaration
+
+```glsl
+uniform ivec2 eyeBrightness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Eye Brightness Smooth
+Smoothed value of eyeBrightness
+#### Declaration
+
+```glsl
+uniform ivec2 eyeBrightnessSmooth;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Is Eye In Water
+If camera is under water, then 1. If in lava 2, otherwise 0.
+#### Declaration
+
+```glsl
+uniform int isEyeInWater;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
 ## Sky and fog
 
 ### OpenGL fog mode
@@ -468,6 +581,20 @@ uniform float rainStrength;
 #### Implementation Support
 
 * ✔️ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+### Wetness
+
+#### Declaration
+
+```glsl
+uniform float wetness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
 * ✔️ OptiFine
 * ❌ Iris
 
