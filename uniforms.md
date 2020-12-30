@@ -26,6 +26,7 @@ uniform int heldItemId;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Held block light value
@@ -48,6 +49,7 @@ uniform int heldBlockLightValue;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
 
 
 ### Held item ID (off hand)
@@ -64,6 +66,8 @@ uniform int heldItemId2;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
+
 
 ### Held block light value (off hand)
 
@@ -79,6 +83,8 @@ uniform int heldBlockLightValue2;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
+
 
 ### Player mood
 
@@ -98,6 +104,120 @@ uniform float playerMood;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
+
+
+### Blindness
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float blindness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
+### Night Vision
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float nightVision;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Screen Brightness
+
+0.0-1.0
+
+#### Declaration
+
+```glsl
+uniform float screenBrightness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+## Common
+
+### Eye Altitude
+Position of the eyes
+#### Declaration
+
+```glsl
+uniform float eyeAltitude;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
+### Eye Brightness
+Block brightness in x, sky brightness in y
+#### Declaration
+
+```glsl
+uniform ivec2 eyeBrightness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Eye Brightness Smooth
+Smoothed value of eyeBrightness
+#### Declaration
+
+```glsl
+uniform ivec2 eyeBrightnessSmooth;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
+
+
+### Is Eye In Water
+If camera is under water, then 1. If in lava 2, otherwise 0.
+#### Declaration
+
+```glsl
+uniform int isEyeInWater;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Sky and fog
@@ -129,6 +249,7 @@ uniform int fogMode;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
 
 
 ### Fog density
@@ -149,6 +270,7 @@ uniform float fogDensity;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
 
 
 ### Fog color
@@ -170,6 +292,7 @@ uniform vec3 fogColor;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
 
 
 ### Sky / clear color
@@ -193,6 +316,7 @@ uniform vec3 skyColor;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
 
 
 ## World time
@@ -211,6 +335,7 @@ uniform int worldTime;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Current world day
@@ -227,6 +352,7 @@ uniform int worldDay;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Moon phase
@@ -252,6 +378,7 @@ uniform int moonPhase;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ## System time
@@ -270,6 +397,7 @@ uniform int frameCounter;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Frame time
@@ -286,6 +414,7 @@ uniform float frameTime;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Frame time counter
@@ -304,6 +433,7 @@ uniform float frameTimeCounter;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Celestial bodies
@@ -338,6 +468,7 @@ uniform float sunAngle;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Sun position
@@ -356,6 +487,7 @@ uniform vec3 sunPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Moon position
@@ -374,6 +506,7 @@ uniform vec3 moonPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Shadow angle
@@ -392,6 +525,7 @@ uniform float shadowAngle;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Shadow light position
@@ -408,6 +542,7 @@ uniform vec3 shadowLightPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Up position
@@ -424,6 +559,7 @@ uniform vec3 upPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Weather
@@ -446,6 +582,21 @@ uniform float rainStrength;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ❌ Iris
+
+### Wetness
+
+#### Declaration
+
+```glsl
+uniform float wetness;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
 
 
 ## Viewport
@@ -466,6 +617,7 @@ uniform float viewWidth;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Viewport height
@@ -482,6 +634,7 @@ uniform float viewHeight;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Aspect ratio
@@ -498,6 +651,7 @@ uniform float aspectRatio;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Camera
@@ -516,6 +670,7 @@ uniform float near;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Far viewing plane
@@ -534,6 +689,7 @@ uniform float far;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Camera position
@@ -557,6 +713,7 @@ uniform vec3 cameraPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Previous camera position
@@ -575,6 +732,7 @@ uniform vec3 previousCameraPosition;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Matrices
@@ -593,6 +751,7 @@ uniform mat4 gbufferModelView;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Inverted model view matrix
@@ -609,6 +768,7 @@ uniform mat4 gbufferModelViewInverse;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
 
 
 ### Previous model view matrix
@@ -625,3 +785,4 @@ uniform mat4 gbufferPreviousModelView;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
+* ✔️ Iris
