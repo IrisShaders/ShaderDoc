@@ -49,7 +49,7 @@ uniform int heldBlockLightValue;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Held item ID (off hand)
@@ -83,7 +83,7 @@ uniform int heldBlockLightValue2;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Player mood
@@ -104,7 +104,7 @@ uniform float playerMood;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Blindness
@@ -138,7 +138,7 @@ uniform float nightVision;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Screen Brightness
@@ -155,7 +155,7 @@ uniform float screenBrightness;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ## Common
@@ -187,7 +187,7 @@ uniform ivec2 eyeBrightness;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Eye Brightness Smooth
@@ -202,7 +202,7 @@ uniform ivec2 eyeBrightnessSmooth;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Is Eye In Water
@@ -316,7 +316,7 @@ uniform vec3 skyColor;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ## World time
@@ -582,7 +582,7 @@ uniform float rainStrength;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 ### Wetness
 
@@ -596,7 +596,7 @@ uniform float wetness;
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ## Viewport
