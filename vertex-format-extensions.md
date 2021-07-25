@@ -163,7 +163,7 @@ block.2=water flowing_water lava flowing_lava # Fluids
 Additionally, you can specify the namespace of the block and define blocks added by other mods.
 
 ```properties
-# Both birch_leaves and minecraft:birch_leaves work, but custom_leaves doesn't!
+# Both birch_leaves and minecraft:birch_leaves work but custom_leaves doesn't!
 block.3=oak_leaves minecraft:birch_leaves modid:custom_leaves
 ```
 
