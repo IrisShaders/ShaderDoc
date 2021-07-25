@@ -176,7 +176,7 @@ void main() {
   switch(mc_Entity.x) {
     case 1: // if rendered block is grass, dirt, etc.
       // do something
-    case 2: / if rendered block is a fluid
+    case 2: // if rendered block is a fluid
       // do something
     default:
       // do something else
