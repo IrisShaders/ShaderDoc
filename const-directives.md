@@ -45,3 +45,38 @@ F(x) = 1 - (ambientOcclusionLevel) (1 - x)
 ```
 
 The implementation in ShadersMod / OptiFine uses a different version of the above function that is less general, only properly handling inputs of `0.2` and `1.0`. While this is adequate for unmodified Minecraft and most mods, if a mod tries to use a value other than 0.2 or 1.0 there will be incorrect ambient occlusion values.
+
+## Super sampling level
+
+Allows shader packs to use super sampling. A super sampling level of 2 means that the width and height of the shader framebuffers are doubled, meaning that there will be 4x the pixels. Super sampling is an extremely expensive method of anti aliasing and should probably be avoided!
+
+⚠️ This directive is not known to be supported on any implementation of the shaders format! Any attempts to use it will almost certainly be ignored.
+
+### Declaration
+
+```glsl
+const int superSamplingLevel = 1;
+```
+
+### Value Range
+
+* Minimum Value: 1 (super sampling disabled)
+* Maximum Value: none
+* Out-of-range values behavior: Disable super sampling
+
+### Valid Declaration Locations
+
+* ❌ Vertex Shader (*.vsh)
+* ❌ Geometry Shader (*.gsh)
+* ✔️ Fragment Shader (*.fsh)
+
+### Implementation Support
+
+* ❓ ShadersMod
+    * Though supporting code is present, it is unused / disabled in ShadersMod v2.7.0 for 1.12, the version used for analysis. Other versions of ShadersMod might support it properly.
+* ❌ OptiFine
+* ❌ Iris
+
+### Implementation Details
+
+ShadersMod and OptiFine both appear to contain stub supporting code for this feature, but neither one actually enables super sampling when requested through this directive.
