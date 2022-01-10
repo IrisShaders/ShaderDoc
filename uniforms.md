@@ -789,6 +789,8 @@ uniform mat4 gbufferPreviousModelView;
 
 ## Dynamic
 
+These uniforms can be changed multiple times in a single program, and as such are not allowed as a custom uniform input.
+
 ### Entity color
 
 The overlay color that should be used for the entity. In OptiFine this is always either `vec4(0.0f, 0.0f, 0.0f, 0.0f)` (no overlay), `vec4(1.0f, 0.0f, 0.0f, 0.3f)` (red hit flash), or `vec4(shade, shade, shade, 0.5f)` (where shade is the current white flash).
