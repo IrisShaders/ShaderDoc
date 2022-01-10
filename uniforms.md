@@ -4,6 +4,10 @@ ShadersMod & OptiFine define many uniforms that allow shaders to access the curr
 
 Note: Some of these uniforms are not supported by ShadersMod. They will take on an initial/default value of `0`, per the OpenGL Specification.
 
+## Dynamic Uniforms
+
+Uniforms marked as "dynamic" can be changed multiple times in a single program, and as such are not allowed as a custom uniform input.
+
 ## Player
 
 ### Held item ID
@@ -222,7 +226,7 @@ uniform int isEyeInWater;
 
 ## Sky and fog
 
-### OpenGL fog mode
+### OpenGL fog mode (dynamic)
 
 Holds the current OpenGL fog mode, or 0 if there is no fog. This is equivalent to the value of `glGetInteger(GL_FOG_MODE)`.
 
@@ -249,10 +253,10 @@ uniform int fogMode;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
-### Fog density
+### Fog density (dynamic)
 
 The current fog density. This is equivalent to the value of `glGetFloat(GL_FOG_DENSITY)`. If fog is disabled, the value of this uniform is 0.0. Note that, for the purposes of computing fog in shaders, fog density is only a factor within the GL_EXP or GL_EXP2 fog formulas, it is not used for the standard GL_LINEAR fog formula. See the [official Khronos documentation](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glFog.xml#description) for more information.
 
@@ -268,9 +272,9 @@ uniform float fogDensity;
 
 #### Implementation Support
 
-* ❌ ShadersMod
+* ❌   ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Fog color
@@ -292,7 +296,7 @@ uniform vec3 fogColor;
 
 * ✔️ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 
 ### Sky / clear color
@@ -787,13 +791,12 @@ uniform mat4 gbufferPreviousModelView;
 * ✔️ OptiFine
 * ✔️ Iris
 
-## Dynamic
+## Entities
 
-These uniforms can be changed multiple times in a single program, and as such are not allowed as a custom uniform input.
+### Entity color (dynamic)
 
-### Entity color
-
-The overlay color that should be used for the entity. In OptiFine this is always either `vec4(0.0f, 0.0f, 0.0f, 0.0f)` (no overlay), `vec4(1.0f, 0.0f, 0.0f, 0.3f)` (red hit flash), or `vec4(shade, shade, shade, 0.5f)` (where shade is the current white flash).
+The overlay color that should be used for the entity. 
+In OptiFine this is always either `vec4(0.0f, 0.0f, 0.0f, 0.0f)` (no overlay), `vec4(1.0f, 0.0f, 0.0f, 0.3f)` (red hit flash), or `vec4(shade, shade, shade, 0.5f)` (where shade is the current white flash).
 This is always set to `vec4(0.0f, 0.0f, 0.0f, 0.0f)` if an entity is not being rendered.
 
 #### Declaration
@@ -807,3 +810,22 @@ uniform vec4 entityColor;
 * ✔️ ShadersMod
 * ✔️ OptiFine
 * ✔️ Iris
+
+### Entity/block entity ID (dynamic)
+
+The ID of the entity or block entity that is being rendered, as specified in `entity.properties`.
+
+#### Declaration
+
+```glsl
+uniform int entityId;
+uniform int blockEntityId;
+```
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+
