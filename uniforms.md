@@ -807,7 +807,7 @@ uniform vec4 entityColor;
 
 #### Implementation Support
 
-* ✔️ ShadersMod
+* ❌ ShadersMod
 * ✔️ OptiFine
 * ✔️ Iris
 
