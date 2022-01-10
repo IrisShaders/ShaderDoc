@@ -786,3 +786,22 @@ uniform mat4 gbufferPreviousModelView;
 * ✔️ ShadersMod
 * ✔️ OptiFine
 * ✔️ Iris
+
+## Dynamic
+
+### Entity color
+
+The overlay color that should be used for the entity. In OptiFine this is always either `vec4(0.0f, 0.0f, 0.0f, 0.0f)` (no overlay), `vec4(1.0f, 0.0f, 0.0f, 0.3f)` (red hit flash), or `vec4(shade, shade, shade, 0.5f)` (where shade is the current white flash).
+This is always set to `vec4(0.0f, 0.0f, 0.0f, 0.0f)` if an entity is not being rendered.
+
+#### Declaration
+
+```glsl
+uniform vec4 entityColor;
+```
+
+#### Implementation Support
+
+* ✔️ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
