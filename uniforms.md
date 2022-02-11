@@ -210,7 +210,7 @@ uniform ivec2 eyeBrightnessSmooth;
 
 
 ### Is Eye In Water
-If camera is under water, then 1. If in lava 2, otherwise 0.
+If camera is under water, then 1. If in lava 2, if in powder snow (1.17+) 3, otherwise 0.
 #### Declaration
 
 ```glsl
