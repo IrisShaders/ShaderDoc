@@ -72,7 +72,7 @@ const float ambientOcclusionLevel = 1.0f;
 * ❓ ShadersMod
     * Though supporting code is present, it is unused / disabled in ShadersMod v2.7.0 for 1.12, the version used for analysis. Other versions of ShadersMod might support it properly.
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
 ### Implementation Details
 
