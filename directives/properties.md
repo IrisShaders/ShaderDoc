@@ -4,9 +4,9 @@
 
 * ❌ ShadersMod
 * ✔️ OptiFine
-* ❌ Iris
+* ✔️ Iris
 
-## Rendering details toggles
+## Rendering detail toggles
 
 ### Clouds mode
 
@@ -19,9 +19,7 @@ enum CloudsMode {
 	fast,
 	fancy,
 	off
-}
-
-CloudsMode clouds;
+} clouds;
 ```
 
 #### Example
@@ -63,7 +61,14 @@ oldHandLight=true
 
 #### Default
 
-TODO
+`false`. The shader pack loader MAY attempt to auto-detect when it is appropriate to use a value of `true` for this setting (such as when the shader pack does not reference the off hand light values) but this is not guaranteed.
+
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
 
 
 ## Mod compatibility
@@ -72,7 +77,7 @@ TODO
 
 Allows a shader pack to control whether dynamic hand lighting mods are enabled or disabled.
 
-With OptiFine, this controls its Dynamic Hand Lighting feature. However, for Iris it would be good to have LambDynamicLights integration so that shader packs can disable 
+With OptiFine, this controls its Dynamic Hand Lighting feature. However, for Iris it would be good to have LambDynamicLights integration so that shader packs can disable dynamic hand lighting in a similar way.
 
 #### Representation
 
@@ -91,4 +96,11 @@ dynamicHandLight=false
 
 #### Default
 
-TODO
+`true`
+
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ❌ Iris
