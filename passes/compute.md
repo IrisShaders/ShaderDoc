@@ -117,7 +117,7 @@ const vec2 workGroupsRender = vec2(1.0f, 1.0f);
 
 ## Concurrency between compute passes
 
-After all compute passes corresponding to a given composite pass have been dispatched, a single `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued. This ensures that all `texture()` calls and all `imageLoad()` / `imageStore()` calls receive up-to-date values following the execution of all compute passes for a given composite pass, as opposed to out-of-date or undefined values.
+After all compute passes corresponding to a given composite pass have been dispatched, a single `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued **both before and after the compute pass**. This ensures that all `texture()` calls and all `imageLoad()` / `imageStore()` calls receive up-to-date values following the execution of all compute passes for a given composite pass, as opposed to out-of-date or undefined values.
 
 NOTE: Notably, the `GL_SHADER_STORAGE_BARRIER_BIT` and `GL_FRAMEBUFFER_BARRIER_BIT` flags are omitted in this call. While omitting `GL_SHADER_STORAGE_BARRIER_BIT` is valid as no release version of Iris or OptiFine supports shader storage buffer objects in any context, it is unclear whether it is valid to omit `GL_FRAMEBUFFER_BARRIER_BIT`. TODO: More investigation is needed here.
 
