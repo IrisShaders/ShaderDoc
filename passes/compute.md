@@ -126,7 +126,7 @@ This is also the behavior in Iris when `allowConcurrentCompute` is set to `false
 
 If `allowConcurrentCompute` is set to `true` in `shaders.properties`, a different concurrency model is enabled for compute shaders, allowing enhanced flexibility for shader developers. **This is an Iris-exclusive feature.**
 
-For a given composite pass, a `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued **after the last compute pass for that composite pass**. As a result, no matter if a composite pass has a single corresponding compute pass or 37 corresponding compute passes, only one memory barrier is issued while executing that composite pass.
+For a given composite pass, a `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued **after the last compute pass for that composite pass**. As a result, no matter if a composite pass has a single corresponding compute pass or 27 corresponding compute passes, only one memory barrier is issued while executing that composite pass.
 
 This ensures that all `texture()` calls and all `imageLoad()` / `imageStore()` calls receive up-to-date values following the execution of all compute passes for a given composite pass, as opposed to out-of-date or undefined values.
 
