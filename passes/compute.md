@@ -114,18 +114,25 @@ If the declaration is omitted, by default the following is inferred, meaning tha
 const vec2 workGroupsRender = vec2(1.0f, 1.0f);
 ```
 
-
 ## Concurrency between compute passes
 
-For a given composite pass, a `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued both **before the first compute pass for that composite pass, and after the last compute pass for that composite pass**. As a result, no matter if a composite pass has a single corresponding compute pass or 37 corresponding compute passes, only two memory barriers are issued while executing that composite pass.
-
-This ensures that all `texture()` calls and all `imageLoad()` / `imageStore()` calls receive up-to-date values following the execution of all compute passes for a given composite pass, as opposed to out-of-date or undefined values.
+In OptiFine, concurrency between compute passes **is not possible**. A `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is executed before and after every compute shader, preventing different compute passes from ever executing in parallel. However, it means that all `texture()` and `imageLoad()`/`imageStore()` commands are guaranteed to return the results of all previous compute or composite passes, even for multiple compute shaders attached to the same composite program.
 
 NOTE: Notably, the `GL_SHADER_STORAGE_BARRIER_BIT` and `GL_FRAMEBUFFER_BARRIER_BIT` flags are omitted in this call. While omitting `GL_SHADER_STORAGE_BARRIER_BIT` is valid as no release version of Iris or OptiFine supports shader storage buffer objects in any context, it is unclear whether it is valid to omit `GL_FRAMEBUFFER_BARRIER_BIT`. TODO: More investigation is needed here.
 
-There are two important corrolaries of this memory barrier behavior:
+This is also the behavior in Iris when `allowConcurrentCompute` is set to `false`, which is the default.
 
-### The Sequential Dispatch Corrolary
+### Enabling allowConcurrentCompute
+
+If `allowConcurrentCompute` is set to `true` in `shaders.properties`, a different concurrency model is enabled for compute shaders, allowing enhanced flexibility for shader developers. **This is an Iris-exclusive feature.**
+
+For a given composite pass, a `glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT | GL_SHADER_IMAGE_ACCESS_BARRIER_BIT)` command is issued **after the last compute pass for that composite pass**. As a result, no matter if a composite pass has a single corresponding compute pass or 37 corresponding compute passes, only one memory barrier is issued while executing that composite pass.
+
+This ensures that all `texture()` calls and all `imageLoad()` / `imageStore()` calls receive up-to-date values following the execution of all compute passes for a given composite pass, as opposed to out-of-date or undefined values.
+
+There are two important corrolaries of this changed memory barrier behavior:
+
+#### The Sequential Dispatch Corrolary
 
 A compute shader belonging to composite pass A is always executed before a compute shader belonging to composite pass B, if composite pass B is executed after composite pass A.
 
@@ -134,7 +141,7 @@ Sequential dispatch between two given compute passes is required if one of the g
 It is possible to define a compute pass without the corresponding composite pass being defined. As a result, it is possible to have both `composite.csh` and `composite1.csh` be defined without either `composite.fsh`/`composite.vsh` or `composite1.fsh`/`composite1.vsh` being defined. This allows exploiting the sequential dispatch corrolary without being restricted by the number of composite passes that the shader pack is utilizing, or the structuring of those composite passes relative to the compute passes.
 
 
-### The Parallel Dispatch Corrolary
+#### The Parallel Dispatch Corrolary
 
 A compute shader belonging to a given composite pass MAY be executed at the same time as another compute pass belonging to the same composite pass.
 
