@@ -57,19 +57,19 @@ In both cases, the number of local invocations and the number of work groups are
 #### Declaring the local size
 
 ```glsl
-layout(local_size_x = X​, local_size_y = Y​, local_size_z = Z​) in;
+layout(local_size_x = X, local_size_y = Y, local_size_z = Z) in;
 ```
 
 Note that any omitted components default to 1, so the following is valid:
 
 ```glsl
-layout(local_size_x = 3​) in;
+layout(local_size_x = 3) in;
 ```
 
 Which is equivalent to:
 
 ```glsl
-layout(local_size_x = 3, local_size_y = 1​, local_size_z = 1) in;
+layout(local_size_x = 3, local_size_y = 1, local_size_z = 1) in;
 ```
 
 See the [OpenGL Wiki](https://www.khronos.org/opengl/wiki/Compute_Shader#Local_size) for more details.
@@ -80,16 +80,35 @@ In OpenGL, the number of work groups is decided by the applicating issuing OpenG
 
 There are two different methods to declare the number of work groups:
 
-1. Constant / absolute  :
+1. Constant / absolute:
     ```glsl
     const ivec3 workGroups = ivec3(1, 8, 1);
     ```
+    
+    In this case, the number of work groups is passed directly to OpenGL without modification.
 2. Relative to screen size:
     ```glsl
     const vec2 workGroupsRender = vec2(1.0f, 0.5f);
     ```
+    In this case, the number of work groups is calculated such that the total number of invocations of this compute shader is equal to the number of pixels that would result from scaling the X and Y axis of the screen by the given scale factors. Since this determines the total number of invocations, the calculation will also be adjusted by the localSize declaration. Note: If localSize.z > 1, then the total number of invocations is equal to the number of pixels times localSize.z.
+    
+    For example, for the following shader, running in a 1920x1080 screen:
+    ```glsl
+    const vec2 workGroupsRender = vec2(1.0f, 0.732f);
+    layout(local_size_x = 19, local_size_y = 1, local_size_z = 5) in;
+    ```
+    
+    First, the equivalent integral screen width is computed, rounding up fractional values:
+    ```glsl
+    scaledWidth = ciel(vec2(1.0f, 0.732f) * vec2(1920, 1080)) = ciel(vec2(1920.0, 790.56)) = ivec2(1920, 791)
+    ```
+    
+    Then, the number of work groups is calculated by dividing and then rounding up:
+    ```glsl
+    workGroups = ivec3(ciel(scaledWidth / vec2(19.0, 1.0)), 1) = ivec3(ciel(101.05, 791.0), 1) = (102, 791, 1)
+    ```
 
-If the declaration is ommitted, by default the number of work groups is equal to the number of pixels of the base screen size, which is equivalent to the following declaration:
+If the declaration is omitted, by default the following is inferred, meaning that the number of compute shader invocations will equal the number of pixels on the screen times localSize.z:
 
 ```glsl
 const vec2 workGroupsRender = vec2(1.0f, 1.0f);
