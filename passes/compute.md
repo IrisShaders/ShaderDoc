@@ -86,13 +86,13 @@ There are two different methods to declare the number of work groups:
     ```
 2. Relative to screen size:
     ```glsl
-    const ivec3 workGroupsRender = vec2(1.0f, 0.5f);
+    const vec2 workGroupsRender = vec2(1.0f, 0.5f);
     ```
 
 If the declaration is ommitted, by default the number of work groups is equal to the number of pixels of the base screen size, which is equivalent to the following declaration:
 
 ```glsl
-const ivec3 workGroupsRender = vec2(1.0f, 1.0f);
+const vec2 workGroupsRender = vec2(1.0f, 1.0f);
 ```
 
 
