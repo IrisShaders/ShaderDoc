@@ -110,7 +110,7 @@ A compute shader belonging to composite pass A is always executed before a compu
 
 Sequential dispatch between two given compute passes is required if one of the given compute passes is dependent on the output of a the other given compute pass.
 
-It is possible to define a compute pass without the corresponding composite pass being defined. As a result, it is possible to have both `composite.csh` and `composite1.csh` be defined without either `composite.fsh`/`composite.vsh` or `composite1.fsh`/`composite1.vsh` being defined. This allows exploiting the sequential dispatch corrolary without 
+It is possible to define a compute pass without the corresponding composite pass being defined. As a result, it is possible to have both `composite.csh` and `composite1.csh` be defined without either `composite.fsh`/`composite.vsh` or `composite1.fsh`/`composite1.vsh` being defined. This allows exploiting the sequential dispatch corrolary without being restricted by the number of composite passes that the shader pack is utilizing, or the structuring of those composite passes relative to the compute passes.
 
 
 ### The Parallel Dispatch Corrolary
