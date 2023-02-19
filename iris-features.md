@@ -239,22 +239,24 @@ void main() {
 
 Custom images allow to write up to 8 custom full images of data.
 
+For more info on allowed formats and restrictions, along for their use in shaders, read https://www.khronos.org/opengl/wiki/Image_Load_Store.
+
 To declare a custom image, use the following in shaders.properties:
 
 ```
-image.cimage1 = samplerAccess format internalFormat pixelType <isRelative> <relativeX/absoluteX> <relativeY/absoluteY> <absoluteZ>
+image.cimage1 = samplerAccess format internalFormat pixelType <shouldClearOnNewFrame> <isRelative> <relativeX/absoluteX> <relativeY/absoluteY> <absoluteZ>
 ```
 
-For example, to declare a RGBA32F custom image half the screen size, use the following:
+For example, to declare a RGBA32F custom image half the screen size that does not clear, use the following:
 
 ```
-image.cimage1 = cSampler1 rgba rgba32f float true 0.5 0.5
+image.cimage1 = cSampler1 rgba rgba32f float false true 0.5 0.5
 ```
 
-And to declare a RGBA8 3D custom image with dimensions of 512x512x512:
+And to declare a RGBA8 3D custom image with dimensions of 512x512x512 that clears every frame:
 
 ```
-image.cimage1 = cSampler1 rgba rgba8 float false 512 512 512
+image.cimage1 = cSampler1 rgba rgba8 float true false 512 512 512
 ```
 
 This image can be accessed in 2 ways:
