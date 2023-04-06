@@ -8,10 +8,14 @@
 2. [Defines / Feature Flags](#defines--feature-flags)
 3. [Uniforms](#uniforms)
 4. [Shader Properties](#shader-properties)
-5. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
-6. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
-7. [Custom Images](#custom-images)
-8. [Extended Shadowcolor](#extended-shadowcolor)
+5. [Custom Entity ID's](#custom-entity-ids)
+6. [Item and Armor Detection](#item-and-armor-detection)
+7. [Light Block Voxelization](#light-block-voxelization)
+8. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
+9. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
+10. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
+11. [Custom Images](#custom-images)
+12. [Extended Shadowcolor](#extended-shadowcolor)
 
 # New Programs
 
@@ -182,6 +186,37 @@ playerShadow = true
 * `shaders.properties`
 
 # The following are exclusive to Iris 1.6.
+
+# Custom Entity ID's
+
+Iris hardcodes some custom entity ID's to detect specific things.
+
+`minecraft:entity_shadow`: The circular shadow under an entity when there is no shadow map.
+`minecraft:zombie_villager_converting`: A zombie villager undergoing conversion.
+
+# Item and Armor Detection
+
+Iris allows detecting items and armor during rendering on *anything*. 
+
+Using `uniform int currentRenderedItemId;`, you can detect items and armor rendered in the level at the point of render.
+
+There are some new ID's that can be detected alongside items and armor:
+
+`trim_material` to detect armor trims on armor. (For example, `trim_emerald`).
+
+# Light Block Voxelization
+
+Using `voxelizeLightBlocks` in shaders.properties, you can now voxelize light blocks in the shadow or main pass.
+
+Light blocks will be rendered as a single (degenerate) invisible quad with all points centered on the middle of the block. (`at_midBlock` will be 0.) The ID will correspond as normal to the light block,
+and UV will be 0. `lmcoord.xy` will both be the value of the light made by the light block.
+
+# Hybrid Deferred Entities
+
+Using the new `gbuffers_entities_translucent` and `gbuffers_block_translucent` programs, you can now render entities and blocks in a hybrid deferred manner.
+
+If `separateEntityDraws` is true in `shaders.properties`, entity draws will behave differently. During the main render, translucent entities and block entities will wait to be drawn until **after** the deferred pass,
+and then will be drawn in the `gbuffers_entities_translucent` and `gbuffers_block_translucent` programs.
 
 # Separate Hardware Shadow Samplers
 
