@@ -28,6 +28,39 @@ This program renders all entities that are marked translucent and have blending 
 ```
 gbuffers_entities_translucent
 ```
+
+## Block Entity Translucent (Iris 1.6)
+
+This program renders all block entities that are marked translucent and have blending enabled. If this program is not used, all block entities will be rendered with `gbuffers_block`.
+
+### Declaration
+
+```
+gbuffers_block_translucent
+```
+
+## Particles (Iris 1.6)
+
+This program renders all non-translucent particles. If this program is not used, all particles will be rendered with `textured_lit`.
+
+### Declaration
+
+```
+gbuffers_particles
+```
+
+## Particles Translucent (Iris 1.6)
+
+This program renders all translucent particles with blending enabled. If this program is not used, all particles will be rendered with `textured_lit`.
+
+This can be combined with [Particle Ordering](#particle-ordering-iris-15) to render translucent particles after the deferred pass.
+
+### Declaration
+
+```
+gbuffers_particles_translucent
+```
+
 # Defines / Feature Flags
 
 ## IS_IRIS (Iris 1.6)
