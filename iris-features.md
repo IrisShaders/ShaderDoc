@@ -51,7 +51,7 @@ gbuffers_particles
 
 ## Particles Translucent (Iris 1.6)
 
-This program renders all translucent particles with blending enabled. If this program is not used, all particles will be rendered with `textured_lit`.
+This program renders all translucent particles with blending enabled. If this program is not used, all translucent particles will be rendered with `particles`.
 
 This can be combined with [Particle Ordering](#particle-ordering-iris-15) to render translucent particles after the deferred pass.
 
