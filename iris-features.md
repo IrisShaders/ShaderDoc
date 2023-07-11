@@ -225,6 +225,7 @@ playerShadow = true
 Iris hardcodes some custom entity ID's to detect specific things.
 
 `minecraft:entity_shadow`: The circular shadow under an entity when there is no shadow map.
+`minecraft:entity_flame`: The flame when an entity is on fire.
 `minecraft:zombie_villager_converting`: A zombie villager undergoing conversion.
 
 # Item and Armor Detection
