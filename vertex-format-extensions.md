@@ -143,4 +143,43 @@ For each quad, the center texture coordinate is just the average of the texture 
 
 ## Block identification
 
-TODO: Document this
+ShadersMod allows you to identify blocks based on their block id. This can be used to render certain blocks differently or give effects to specific blocks.
+
+### Declaration
+
+```glsl
+attribute vec2 mc_Entity;
+```
+
+### Configuration
+
+To define a block id group, use `block.n=<id>` where `n` is the group's id, and `<id>` is the space-separated list of block id's you want to add to the group.
+
+```properties
+block.1=grass_block dirt coarse_dirt gravel sand
+block.2=water flowing_water lava flowing_lava # Fluids
+```
+
+Additionally, you can specify the namespace of the block and define blocks added by other mods.
+
+```properties
+# Both birch_leaves and minecraft:birch_leaves work but custom_leaves doesn't!
+block.3=oak_leaves minecraft:birch_leaves modid:custom_leaves
+```
+
+### Example
+
+```glsl
+attribute vec2 mc_Entity;
+
+void main() {
+  switch(mc_Entity.x) {
+    case 1: // if rendered block is grass, dirt, etc.
+      // do something
+    case 2: // if rendered block is a fluid
+      // do something
+    default:
+      // do something else
+  }
+}
+```
