@@ -525,8 +525,8 @@ The image can be written and read per-pixel by declaring it as an `image`:
 uniform image2D cimage1;
 
 void main() {
-    vec4 previousValue = imageLoad(cimage1, vec2(1, 1)); // Reads from first pixel in the image
-    imageStore(cimage1, vec2(1, 1), vec4(1, 0, 0, 1)); // Writes to first pixel in the image
+    vec4 previousValue = imageLoad(cimage1, vec2(0, 0)); // Reads from first pixel in the image
+    imageStore(cimage1, vec2(0, 0), vec4(1, 0, 0, 1)); // Writes to first pixel in the image
 }
 ```
 
@@ -534,9 +534,11 @@ Or the image can be read with filtering as a `sampler`:
 
 ```glsl
 uniform sampler2D cSampler1;
+varying float viewWidth;
+varying float viewHeight;
 
 void main() {
-    gl_FragColor = texture2D(cSampler1, gl_FragCoord.xy); // Samples the first pixel of the image with smooth linear filtering.
+    gl_FragColor = texture2D(cSampler1, gl_FragCoord.xy / vec2(viewWidth, viewHeight)); // Samples the current pixel of the image with smooth linear filtering.
 }
 ```
 
