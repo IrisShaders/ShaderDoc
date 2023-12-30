@@ -376,6 +376,20 @@ customTexture.<name> = <path> <type> <internalFormat> <dimensions> <pixelFormat>
 
 * `shaders.properties`
 
+## Concurrent Compute (Iris 1.4)
+
+This value controls if compute shaders within the same pass are allowed to run concurrently. For more information, reference [Concurrency Between Compute Passes](passes/compute.md#concurrency-between-compute-passes).
+
+### Declaration
+
+```
+allowConcurrentCompute = true
+```
+
+### Valid Declaration Locations
+
+* `shaders.properties`
+
 # The following are exclusive to Iris 1.6.
 
 # Custom Entity ID's
