@@ -4,18 +4,21 @@
 
 ## Table of Contents
 
-1. [New Programs](#new-programs)
-2. [Defines / Feature Flags](#defines--feature-flags)
-3. [Uniforms](#uniforms)
-4. [Shader Properties](#shader-properties)
-5. [Custom Entity ID's](#custom-entity-ids)
-6. [Item and Armor Detection](#item-and-armor-detection)
-7. [Light Block Voxelization](#light-block-voxelization)
-8. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
-9. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
-10. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
-11. [Custom Images](#custom-images)
-12. [Extended Shadowcolor](#extended-shadowcolor)
+1.  [New Programs](#new-programs)
+2.  [Defines / Feature Flags](#defines--feature-flags)
+3.  [Uniforms](#uniforms)
+4.  [Shader Properties](#shader-properties)
+5.  [Custom Entity ID's](#custom-entity-ids)
+6.  [Item and Armor Detection](#item-and-armor-detection)
+7.  [Dimension Folders](#dimension-folders)
+8.  [Color Spaces](#color-spaces-iris-164)
+9.  [Reverse Shadow Culling](#reversed-shadow-culling-iris-166)
+10. [Light Block Voxelization](#light-block-voxelization)
+11. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
+12. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
+13. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
+14. [Custom Images](#custom-images)
+15. [Extended Shadowcolor](#extended-shadowcolor)
 
 # New Programs
 
@@ -61,6 +64,27 @@ This can be combined with [Particle Ordering](#particle-ordering-iris-15) to ren
 gbuffers_particles_translucent
 ```
 
+## Begin Program (Iris 1.6)
+
+The begin program is a new composite pass that runs before the shadow pass, and is intended to be used for setting up any data that is needed for the shadow pass. It can be used as a normal composite.
+
+### Declaration
+
+```
+begin
+```
+
+## Setup Program (Iris 1.6)
+
+The setup pass can only be used as a compute pass, and is only run once, during the pack load or when the screen size changes. However, you can use a_z suffixes to have multiple compute passes.
+
+### Declaration
+
+```
+setup.csh
+setup_a.csh ... setup_z.csh
+```
+
 # Defines / Feature Flags
 
 ## IS_IRIS (Iris 1.6)
@@ -87,6 +111,8 @@ The currently added feature flags are:
 
 `HIGHER_SHADOWCOLOR` (required for [Extended Shadowcolor](#extended-shadowcolor))
 
+`REVERSED_CULLING` (recommended, but not required for [Reverse Shadow Culling](#reversed-shadow-culling-iris-166))
+
 # Uniforms
 
 ## Lightning bolt position (Iris 1.2.5)
@@ -109,7 +135,7 @@ This value controls the "thunder strength", equivalent to Optifine's rainStrengt
 uniform float thunderStrength;
 ```
 
-## Player health, air, and hunger (Iris 1.4)
+## Player health, air, and hunger (Iris 1.2.7)
 
 These are multiple declarations to read player health, air, and hunger.
 
@@ -130,12 +156,31 @@ uniform float maxPlayerHunger;
 
 These uniforms read multiple aspects of the camera.
 
+`eyePosition` stores the world space position of the player's head model. When in first person view, this is equivalent to `cameraPosition`. However in third person mode the two will differ as the camera and player's head are now in different locations.
+
 ### Declaration
 
 ```glsl
 uniform bool firstPersonCamera;
 uniform bool isSpectator;
 uniform vec3 eyePosition;
+```
+
+## Additional Player Model Uniforms (Iris 1.6.11)
+
+These uniforms read multiple aspects of the player model and camera.
+
+`relativeEyePosition` reads the world space offset from the player model's head position to the camera's position(ie `cameraPosition` - `eyePosition`).
+
+`playerLookVector` reads the world alligned direction the player model's head is facing. This facing direction is not affected by animations such as swimming.
+
+`playerBodyVector` reads the world alligned direction the player model's body is facing, although this behavior is currently broken and reads the same value as `playerLookVector`.
+
+### Declaration
+```glsl
+uniform vec3 relativeEyePosition;
+uniform vec3 playerLookVector;
+uniform vec3 playerBodyVector;
 ```
 
 ## World Info Uniforms (Iris 1.5)
@@ -151,6 +196,103 @@ uniform int heightLimit;
 uniform bool hasCeiling;
 uniform bool hasSkylight;
 uniform float ambientLight;
+```
+
+## Logical Height Uniform (Iris 1.6)
+
+This uniform reads the logical height of the current dimension, which refers to the maximum height to which chorus fruits and nether portals can bring players within the dimension.
+
+### Declaration
+
+```glsl
+uniform int logicalHeightLimit;
+```
+
+## Cloud Height Uniform (Iris 1.6.9)
+
+This uniform reads the height of vanilla clouds in the current dimension in blocks. Value is `NaN` for dimensions without clouds.
+
+### Declaration
+
+```glsl
+uniform float cloudHeight;
+```
+
+## Player sneaking, sprinting, hurt, invisible, and burning uniforms (Iris 1.5)
+
+These boolean uniforms are `true` while the condition they are named after is active.
+
+`is_hurt` is `true` for a short time after the player is hurt for any reason, then returns to `false`.
+
+`is_invisible` is `true` both when using an invisibility potion and when in spectator mode.
+
+### Declaration
+
+```glsl
+uniform bool is_sneaking;
+uniform bool is_sprinting;
+uniform bool is_hurt;
+uniform bool is_invisible;
+uniform bool is_burning;
+```
+
+## Player is on ground (Iris 1.6.5)
+
+This boolean uniform is `true` when the player is not flying is an on the ground, and `false` otherwise.
+
+### Declaration
+
+```glsl
+uniform bool is_on_ground;
+```
+
+## Color Space Uniforms (Iris 1.6.4)
+
+This value reads the color space used when displaying to the screen. 0 is sRGB, 1 is DCI_P3, 2 is Display P3, 3 is REC2020, 4 is Adobe RGB.
+
+### Declaration
+```glsl
+uniform int currentColorSpace;
+```
+
+## Biome Uniforms (Iris 1.6.11)
+
+These uniforms are used to identify and read aspects of the biome the player is currently in. These uniforms are defined the same as when using custom uniforms with these variables.
+
+`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
+
+`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms, the following are recognized:
+
+`CAT_NONE`, `CAT_TAIGA`, `CAT_EXTREME_HILLS`, `CAT_JUNGLE`, `CAT_MESA`, `CAT_PLAINS`, `CAT_SAVANNA`, `CAT_ICY`, `CAT_THE_END`, `CAT_BEACH`, `CAT_FOREST`, `CAT_OCEAN`, `CAT_DESERT`, `CAT_RIVER`, `CAT_SWAMP`, `CAT_MUSHROOM`, `CAT_NETHER`
+
+`biome_precipitation` tells what type of precipitation occurs in this biome. 0 is no precipitation, 1 is rain, 2 is snow. The following defines can also be used: `PPT_NONE`, `PPT_RAIN`, `PPT_SNOW`.
+
+`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally, and range in value form 0 to 1.
+
+### Declaration
+```glsl
+uniform int biome;
+uniform int biome_category;
+uniform int biome_precipitation;
+uniform float rainfall;
+uniform float temperature;
+```
+
+## System Time Uniforms (Iris 1.6.11)
+
+These uniforms allow shaders to access the OS reported date and time.
+
+`currentDate` is in the following format: ivec3(year, month, day)
+
+`currentTime` is in the following format: ivec3(hour, minute, second)
+
+`currentYearTime` is in the following format: ivec2(seconds_ellapsed_in_year, seconds_remaining_in_year)
+
+### Declaration
+```glsl
+uniform ivec3 currentDate;
+uniform ivec3 currentTime;
+uniform ivec2 currentYearTime;
 ```
 
 # Shader Properties
@@ -218,6 +360,36 @@ playerShadow = true
 
 * `shaders.properties`
 
+## Iris Custom Textures (Iris 1.5)
+
+Iris supports custom textures with unique sampler names. The syntax is identical to Optifine custom textures, except `<name>` must be different from any existing sampler, and no stage is specified as the sampler is avaliable to all programs. Iris Custom textures also support raw textures.
+
+### Declaration
+
+```
+customTexture.<name> = <path>
+
+customTexture.<name> = <path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
+```
+
+### Valid Declaration Locations
+
+* `shaders.properties`
+
+## Concurrent Compute (Iris 1.4)
+
+This value controls if compute shaders within the same pass are allowed to run concurrently. For more information, reference [Concurrency Between Compute Passes](passes/compute.md#concurrency-between-compute-passes).
+
+### Declaration
+
+```
+allowConcurrentCompute = true
+```
+
+### Valid Declaration Locations
+
+* `shaders.properties`
+
 # The following are exclusive to Iris 1.6.
 
 # Custom Entity ID's
@@ -239,6 +411,33 @@ Using `uniform int currentRenderedItemId;`, you can detect items and armor rende
 There are some new ID's that can be detected alongside items and armor:
 
 `trim_material` to detect armor trims on armor. (For example, `trim_emerald`).
+
+# Dimension Folders
+
+When `dimension.properties` is added to the shader pack root, behavior relating to dimensions change.
+Iris will no longer resolve any dimensions for you, and you are expected to resolve you own. The syntax for dimension.properties is as follows:
+
+`dimension.<folderName> = <dimensionNamespace>:<dimensionPath>`
+
+- `<folderName>`: The name of the folder containing the shaders used for the given dimension.
+- `<dimensionNamespace>`: The namespace for the dimension, vanilla shaders will use `minecraft`.
+- `<dimensionPath>`: The internal name of the dimension.
+
+*You can use `*` as a value to fallback all dimensions.*
+
+The following example sets the shaders for the vanilla Nether dimension to the `netherShaders` folder:
+
+`dimension.netherShaders = minecraft:the_nether`
+
+# Color Spaces (Iris 1.6.4)
+
+Iris 1.6.4 added support for additional color spaces beyond sRGB (DCI_P3, Display P3, REC2020, and Adobe RGB). This does not allow for outputting HDR values, it simply applies a tonemapping operation in the given color space instead of sRGB.
+
+By default, Iris will assume all shaders output sRGB, and if a different color spaces is selected it will convert the sRGB output to that color space for display. If `supportsColorCorrection = true` is in shaders.properties however, this conversion will be left up to the shader. In all scenarios, the chosen colorspace is avaliable through the uniform `currentColorSpace`.
+
+# Reversed Shadow Culling (Iris 1.6.6)
+
+Setting `shadow.culling = reversed` in shaders.properties will create an area around the player where geometry in the shadow pass will not be culled. Outside this area, geometry will be culled as if shadow culling was enabled. This "unculled" distance is controled with `const float voxelDistance`, and the culled distance is controlled as normal with `const float shadowDistance` (and cannot be lower than `voxelDistance`). This feature is intended for packs which utilize both voxelization and a shadow map.
 
 # Light Block Voxelization
 
@@ -274,7 +473,11 @@ Iris will give an error and fail to load a shader if allocating an SSBO would ot
 
 To allocate an SSBO for a shaderpack, put the following in shaders.properties, where index can be between 0 and 8:
 
-`bufferObject.<index> = byteSize`
+`bufferObject.<index> = <byteSize> <isRelative> <scaleX> <scaleY>`
+
+To define the SSBO as fixed size, simply exclude the last three options and fill `<byteSize>` with the size of the SSBO.
+
+SSBOs can also be defined as screen-sized (Iris 1.6.6), where their size is relative to the screen dimensions. This is useful for storing data per-pixel. Fill `<isRelative>` with `true`, `<scaleX>` and `<scaleY>` then define the multipliers for the number of "pixels" in the SSBO relative to each screen dimension (i.e. 1.0 would mean the same dimension as the screen), and `<byteSize>` defines the number of bytes per "pixel". The total size of the SSBO is calculated as `int(viewWidth * scaleX) * int(viewHeight * scaleY) * byteSize`.
 
 To use an SSBO in a shader, you must define it's layout. Here is an example definition of a SSBO, where bufferName can be any name:
 
@@ -338,8 +541,8 @@ The image can be written and read per-pixel by declaring it as an `image`:
 uniform image2D cimage1;
 
 void main() {
-    vec4 previousValue = imageLoad(cimage1, vec2(1, 1)); // Reads from first pixel in the image
-    imageStore(cimage1, vec2(1, 1), vec4(1, 0, 0, 1)); // Writes to first pixel in the image
+    vec4 previousValue = imageLoad(cimage1, vec2(0, 0)); // Reads from first pixel in the image
+    imageStore(cimage1, vec2(0, 0), vec4(1, 0, 0, 1)); // Writes to first pixel in the image
 }
 ```
 
@@ -347,9 +550,11 @@ Or the image can be read with filtering as a `sampler`:
 
 ```glsl
 uniform sampler2D cSampler1;
+varying float viewWidth;
+varying float viewHeight;
 
 void main() {
-    gl_FragColor = texture2D(cSampler1, gl_FragCoord.xy); // Samples the first pixel of the image with smooth linear filtering.
+    gl_FragColor = texture2D(cSampler1, gl_FragCoord.xy / vec2(viewWidth, viewHeight)); // Samples the current pixel of the image with smooth linear filtering.
 }
 ```
 
