@@ -109,7 +109,7 @@ This value controls the "thunder strength", equivalent to Optifine's rainStrengt
 uniform float thunderStrength;
 ```
 
-## Player health, air, and hunger (Iris 1.4)
+## Player health, air, and hunger (Iris 1.2.7)
 
 These are multiple declarations to read player health, air, and hunger.
 
@@ -170,6 +170,34 @@ uniform int heightLimit;
 uniform bool hasCeiling;
 uniform bool hasSkylight;
 uniform float ambientLight;
+```
+
+## Player sneaking, sprinting, hurt, invisible, and burning uniforms (Iris 1.5)
+
+These boolean uniforms are `true` while the condition they are named after is active.
+
+`is_hurt` is `true` for a short time after the player is hurt for any reason, then returns to `false`.
+
+`is_invisible` is `true` both when using an invisibility potion and when in spectator mode.
+
+### Declaration
+
+```glsl
+uniform bool is_sneaking;
+uniform bool is_sprinting;
+uniform bool is_hurt;
+uniform bool is_invisible;
+uniform bool is_burning;
+```
+
+## Player is on ground (Iris 1.6.5)
+
+This boolean uniform is `true` when the player is not flying is an on the ground, and `false` otherwise.
+
+### Declaration
+
+```glsl
+uniform bool is_on_ground;
 ```
 
 # Shader Properties
