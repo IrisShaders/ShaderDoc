@@ -431,7 +431,7 @@ The following example sets the shaders for the vanilla Nether dimension to the `
 
 # Color Spaces (Iris 1.6.4)
 
-Iris 1.6.4 added support for additional color spaces beyond sRGB (DCI_P3, Display P3, REC2020, and Adobe RGB). This allows support for outputting to HDR displays.
+Iris 1.6.4 added support for additional color spaces beyond sRGB (DCI_P3, Display P3, REC2020, and Adobe RGB). This does not allow for outputting HDR values, it simply applies a tonemapping operation in the given color space instead of sRGB.
 
 By default, Iris will assume all shaders output sRGB, and if a different color spaces is selected it will convert the sRGB output to that color space for display. If `supportsColorCorrection = true` is in shaders.properties however, this conversion will be left up to the shader. In all scenarios, the chosen colorspace is avaliable through the uniform `currentColorSpace`.
 
