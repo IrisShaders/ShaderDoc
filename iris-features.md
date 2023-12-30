@@ -138,6 +138,23 @@ uniform bool isSpectator;
 uniform vec3 eyePosition;
 ```
 
+## Additional Player Model Uniforms (Iris 1.6.11)
+
+These uniforms read multiple aspects of the player model and camera.
+
+`relativeEyePosition` reads the world space offset from the player model's head position to the camera's position(ie `cameraPosition` - `eyePosition`).
+
+`playerLookVector` reads the world alligned direction the player model's head is facing. This facing direction is not affected by animations such as swimming.
+
+`playerBodyVector` reads the world alligned direction the player model's body is facing, although this behavior is currently broken and reads the same value as `playerLookVector`.
+
+### Declaration
+```glsl
+uniform vec3 relativeEyePosition;
+uniform vec3 playerLookVector;
+uniform vec3 playerBodyVector;
+```
+
 ## World Info Uniforms (Iris 1.5)
 
 These uniforms read many aspects of the dimension, such as the minimum/maximum height and ambient lighting.
