@@ -61,6 +61,27 @@ This can be combined with [Particle Ordering](#particle-ordering-iris-15) to ren
 gbuffers_particles_translucent
 ```
 
+## Begin Program (Iris 1.6)
+
+The begin program is a new composite pass that runs before the shadow pass, and is intended to be used for setting up any data that is needed for the shadow pass. It can be used as a normal composite.
+
+### Declaration
+
+```
+begin
+```
+
+## Setup Program (Iris 1.6)
+
+The setup pass can only be used as a compute pass, and is only run once, during the pack load or when the screen size changes. However, you can use a_z suffixes to have multiple compute passes.
+
+### Declaration
+
+```
+setup.csh
+setup_a.csh ... setup_z.csh
+```
+
 # Defines / Feature Flags
 
 ## IS_IRIS (Iris 1.6)
