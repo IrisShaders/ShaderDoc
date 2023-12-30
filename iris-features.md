@@ -4,20 +4,21 @@
 
 ## Table of Contents
 
-1. [New Programs](#new-programs)
-2. [Defines / Feature Flags](#defines--feature-flags)
-3. [Uniforms](#uniforms)
-4. [Shader Properties](#shader-properties)
-5. [Custom Entity ID's](#custom-entity-ids)
-6. [Item and Armor Detection](#item-and-armor-detection)
-7. [Dimension Folders](#dimension-folders)
-8. [Color Spaces](#color-spaces-iris-164)
-7. [Light Block Voxelization](#light-block-voxelization)
-8. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
-9. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
-10. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
-11. [Custom Images](#custom-images)
-12. [Extended Shadowcolor](#extended-shadowcolor)
+1.  [New Programs](#new-programs)
+2.  [Defines / Feature Flags](#defines--feature-flags)
+3.  [Uniforms](#uniforms)
+4.  [Shader Properties](#shader-properties)
+5.  [Custom Entity ID's](#custom-entity-ids)
+6.  [Item and Armor Detection](#item-and-armor-detection)
+7.  [Dimension Folders](#dimension-folders)
+8.  [Color Spaces](#color-spaces-iris-164)
+9.  [Reverse Shadow Culling](#reversed-shadow-culling-iris-166)
+10. [Light Block Voxelization](#light-block-voxelization)
+11. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
+12. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
+13. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
+14. [Custom Images](#custom-images)
+15. [Extended Shadowcolor](#extended-shadowcolor)
 
 # New Programs
 
@@ -417,6 +418,10 @@ The following example sets the shaders for the vanilla Nether dimension to the `
 Iris 1.6.4 added support for additional color spaces beyond sRGB (DCI_P3, Display P3, REC2020, and Adobe RGB). This allows support for outputting to HDR displays.
 
 By default, Iris will assume all shaders output sRGB, and if a different color spaces is selected it will convert the sRGB output to that color space for display. If `supportsColorCorrection = true` is in shaders.properties however, this conversion will be left up to the shader. In all scenarios, the chosen colorspace is avaliable through the uniform `currentColorSpace`.
+
+# Reversed Shadow Culling (Iris 1.6.6)
+
+Setting `shadow.culling = reversed` in shaders.properties will create an area around the player where geometry in the shadow pass will not be culled. Outside this area, geometry will be culled as if shadow culling was enabled. This "unculled" distance is controled with `const float voxelDistance`, and the culled distance is controlled as normal with `const float shadowDistance` (and cannot be lower than `voxelDistance`). This feature is intended for packs which utilize both voxelization and a shadow map.
 
 # Light Block Voxelization
 
