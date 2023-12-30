@@ -355,6 +355,22 @@ playerShadow = true
 
 * `shaders.properties`
 
+## Iris Custom Textures (Iris 1.5)
+
+Iris supports custom textures with unique sampler names. The syntax is identical to Optifine custom textures, except `<name>` must be different from any existing sampler, and no stage is specified as the sampler is avaliable to all programs. Iris Custom textures also support raw textures.
+
+### Declaration
+
+```
+customTexture.<name> = <path>
+
+customTexture.<name> = <path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
+```
+
+### Valid Declaration Locations
+
+* `shaders.properties`
+
 # The following are exclusive to Iris 1.6.
 
 # Custom Entity ID's
