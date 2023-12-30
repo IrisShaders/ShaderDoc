@@ -10,6 +10,7 @@
 4. [Shader Properties](#shader-properties)
 5. [Custom Entity ID's](#custom-entity-ids)
 6. [Item and Armor Detection](#item-and-armor-detection)
+7. [Dimension Folders](#dimension-folders)
 7. [Light Block Voxelization](#light-block-voxelization)
 8. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
 9. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
@@ -392,6 +393,23 @@ Using `uniform int currentRenderedItemId;`, you can detect items and armor rende
 There are some new ID's that can be detected alongside items and armor:
 
 `trim_material` to detect armor trims on armor. (For example, `trim_emerald`).
+
+# Dimension Folders
+
+When `dimension.properties` is added to the shader pack root, behavior relating to dimensions change.
+Iris will no longer resolve any dimensions for you, and you are expected to resolve you own. The syntax for dimension.properties is as follows:
+
+`dimension.<folderName> = <dimensionNamespace>:<dimensionPath>`
+
+- `<folderName>`: The name of the folder containing the shaders used for the given dimension.
+- `<dimensionNamespace>`: The namespace for the dimension, vanilla shaders will use `minecraft`.
+- `<dimensionPath>`: The internal name of the dimension.
+
+*You can use `*` as a value to fallback all dimensions.*
+
+The following example sets the shaders for the vanilla Nether dimension to the `netherShaders` folder:
+
+`dimension.netherShaders = minecraft:the_nether`
 
 # Light Block Voxelization
 
