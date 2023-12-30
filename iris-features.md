@@ -457,7 +457,11 @@ Iris will give an error and fail to load a shader if allocating an SSBO would ot
 
 To allocate an SSBO for a shaderpack, put the following in shaders.properties, where index can be between 0 and 8:
 
-`bufferObject.<index> = byteSize`
+`bufferObject.<index> = <byteSize> <isRelative> <scaleX> <scaleY>`
+
+To define the SSBO as fixed size, simply exclude the last three options and fill `<byteSize>` with the size of the SSBO.
+
+SSBOs can also be defined as screen-sized (Iris 1.6.6), where their size is relative to the screen dimensions. This is useful for storing data per-pixel. Fill `<isRelative>` with `true`, `<scaleX>` and `<scaleY>` then define the multipliers for the number of "pixels" in the SSBO relative to each screen dimension (i.e. 1.0 would mean the same dimension as the screen), and `<byteSize>` defines the number of bytes per "pixel". The total size of the SSBO is calculated as `int(viewWidth * scaleX) * int(viewHeight * scaleY) * byteSize`.
 
 To use an SSBO in a shader, you must define it's layout. Here is an example definition of a SSBO, where bufferName can be any name:
 
