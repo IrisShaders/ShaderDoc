@@ -172,6 +172,26 @@ uniform bool hasSkylight;
 uniform float ambientLight;
 ```
 
+## Logical Height Uniform (Iris 1.6)
+
+This uniform reads the logical height of the current dimension, which refers to the maximum height to which chorus fruits and nether portals can bring players within the dimension.
+
+### Declaration
+
+```glsl
+uniform int logicalHeightLimit;
+```
+
+## Cloud Height Uniform (Iris 1.6.9)
+
+This uniform reads the height of vanilla clouds in the current dimension in blocks. Value is `NaN` for dimensions without clouds.
+
+### Declaration
+
+```glsl
+uniform float cloudHeight;
+```
+
 ## Player sneaking, sprinting, hurt, invisible, and burning uniforms (Iris 1.5)
 
 These boolean uniforms are `true` while the condition they are named after is active.
