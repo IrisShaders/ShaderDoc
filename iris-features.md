@@ -130,6 +130,8 @@ uniform float maxPlayerHunger;
 
 These uniforms read multiple aspects of the camera.
 
+`eyePosition` stores the world space position of the player's head model. When in first person view, this is equivalent to `cameraPosition`. However in third person mode the two will differ as the camera and player's head are now in different locations.
+
 ### Declaration
 
 ```glsl
