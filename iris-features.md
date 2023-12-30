@@ -252,6 +252,23 @@ uniform float rainfall;
 uniform float temperature;
 ```
 
+## System Time Uniforms (Iris 1.6.11)
+
+These uniforms allow shaders to access the OS reported date and time.
+
+`currentDate` is in the following format: ivec3(year, month, day)
+
+`currentTime` is in the following format: ivec3(hour, minute, second)
+
+`currentYearTime` is in the following format: ivec2(seconds_ellapsed_in_year, seconds_remaining_in_year)
+
+### Declaration
+```glsl
+uniform ivec3 currentDate;
+uniform ivec3 currentTime;
+uniform ivec2 currentYearTime;
+```
+
 # Shader Properties
 
 ## Particle ordering (Iris 1.5)
