@@ -127,7 +127,7 @@ If the dot product is negative, the `w` value of tangent is set to `-1`. Otherwi
 
 ## Center texture coordinate
 
-TODO: Overview
+This one's pretty simple; it's the average of all 4 vertices' texture coordinates.
 
 ### Declaration
 
@@ -140,6 +140,10 @@ attribute vec2 mc_midTexCoord;
 
 For each quad, the center texture coordinate is just the average of the texture coordinate for each vertex. That is, `mc_midTexCoord.x` is the average of all of the `x` / `u` values, and `mc_midTexCoord.y` is the average of all of the `y` / `v` values. It's as simple as that!
 
+```java
+float midU = (v0.u + v1.u + v2.u + v3.u) * 0.25f;
+float midV = (v0.v + v1.v + v2.v + v3.v) * 0.25f;
+```
 
 ## Block identification
 

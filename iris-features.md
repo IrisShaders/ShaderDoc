@@ -4,21 +4,22 @@
 
 ## Table of Contents
 
-1.  [New Programs](#new-programs)
-2.  [Defines / Feature Flags](#defines--feature-flags)
-3.  [Uniforms](#uniforms)
-4.  [Shader Properties](#shader-properties)
-5.  [Custom Entity ID's](#custom-entity-ids)
-6.  [Item and Armor Detection](#item-and-armor-detection)
-7.  [Dimension Folders](#dimension-folders)
-8.  [Color Spaces](#color-spaces-iris-164)
-9.  [Reverse Shadow Culling](#reversed-shadow-culling-iris-166)
-10. [Light Block Voxelization](#light-block-voxelization)
-11. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
-12. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
-13. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
-14. [Custom Images](#custom-images)
-15. [Extended Shadowcolor](#extended-shadowcolor)
+1. [New Programs](#new-programs)
+2. [Enhanced Custom Textures](#enhanced-custom-textures)
+3. [Defines / Feature Flags](#defines--feature-flags)
+4. [Uniforms](#uniforms)
+5. [Shader Properties](#shader-properties)
+6. [Custom Entity ID's](#custom-entity-ids)
+7. [Item and Armor Detection](#item-and-armor-detection)
+8. [Dimension Folders](#dimension-folders)
+9. [Color Spaces](#color-spaces-iris-164)
+10. [Reverse Shadow Culling](#reversed-shadow-culling-iris-166)
+11. [Light Block Voxelization](#light-block-voxelization)
+12. [Hybrid-Deferred Entities](#hybrid-deferred-entities)
+13. [Separate Hardware Shadow Samplers](#separate-hardware-shadow-samplers)
+14. [Shader Storage Buffer Objects](#shader-storage-buffer-objects)
+15. [Custom Images](#custom-images)
+16. [Extended Shadowcolor](#extended-shadowcolor)
 
 # New Programs
 
@@ -85,6 +86,21 @@ setup.csh
 setup_a.csh ... setup_z.csh
 ```
 
+# Enhanced Custom Textures
+
+Instead of using the OptiFine format of replacing a color texture with a custom texture, you can define entirely custom textures to use in programs.
+This completely sidesteps the obsolete requirements of sacrificing a color texture. However, this does not change the amount of textures (16/32 depending on machine) you can use in a program at a given time.
+
+### Example
+
+```properties
+customTexture.name =<path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
+```
+
+```glsl
+uniform sampler2D name;
+```
+
 # Defines / Feature Flags
 
 ## IS_IRIS (Iris 1.6)
@@ -135,9 +151,9 @@ This value controls the "thunder strength", equivalent to Optifine's rainStrengt
 uniform float thunderStrength;
 ```
 
-## Player health, air, and hunger (Iris 1.2.7)
+## Player health, air, armor, and hunger (Iris 1.2.7 - 1.6.15)
 
-These are multiple declarations to read player health, air, and hunger.
+These are multiple declarations to read player health, air, and hunger. Armor was added in 1.6.15.
 
 The uniforms marked with `current` are 0-1. To get them as a full value, multiply them by their `max` values.
 
@@ -150,6 +166,8 @@ uniform float currentPlayerAir;
 uniform float maxPlayerAir;
 uniform float currentPlayerHunger;
 uniform float maxPlayerHunger;
+uniform float currentPlayerArmor;
+uniform float maxPlayerArmor;
 ```
 
 ## Camera uniforms & Eye Position (Iris 1.4)
