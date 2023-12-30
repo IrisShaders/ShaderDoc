@@ -220,6 +220,15 @@ This boolean uniform is `true` when the player is not flying is an on the ground
 uniform bool is_on_ground;
 ```
 
+## Color Space Uniforms (Iris 1.6.4)
+
+This value reads the color space used when displaying to the screen. 0 is sRGB, 1 is DCI_P3, 2 is Display P3, 3 is REC2020, 4 is Adobe RGB.
+
+### Declaration
+```glsl
+uniform int currentColorSpace;
+```
+
 # Shader Properties
 
 ## Particle ordering (Iris 1.5)
