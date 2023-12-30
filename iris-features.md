@@ -111,6 +111,8 @@ The currently added feature flags are:
 
 `HIGHER_SHADOWCOLOR` (required for [Extended Shadowcolor](#extended-shadowcolor))
 
+`REVERSED_CULLING` (recommended, but not required for [Reverse Shadow Culling](#reversed-shadow-culling-iris-166))
+
 # Uniforms
 
 ## Lightning bolt position (Iris 1.2.5)
