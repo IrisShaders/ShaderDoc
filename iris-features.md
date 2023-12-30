@@ -229,6 +229,29 @@ This value reads the color space used when displaying to the screen. 0 is sRGB, 
 uniform int currentColorSpace;
 ```
 
+## Biome Uniforms (Iris 1.6.11)
+
+These uniforms are used to identify and read aspects of the biome the player is currently in. These uniforms are defined the same as when using custom uniforms with these variables.
+
+`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
+
+`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms, the following are recognized:
+
+`CAT_NONE`, `CAT_TAIGA`, `CAT_EXTREME_HILLS`, `CAT_JUNGLE`, `CAT_MESA`, `CAT_PLAINS`, `CAT_SAVANNA`, `CAT_ICY`, `CAT_THE_END`, `CAT_BEACH`, `CAT_FOREST`, `CAT_OCEAN`, `CAT_DESERT`, `CAT_RIVER`, `CAT_SWAMP`, `CAT_MUSHROOM`, `CAT_NETHER`
+
+`biome_precipitation` tells what type of precipitation occurs in this biome. 0 is no precipitation, 1 is rain, 2 is snow. The following defines can also be used: `PPT_NONE`, `PPT_RAIN`, `PPT_SNOW`.
+
+`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally, and range in value form 0 to 1.
+
+### Declaration
+```glsl
+uniform int biome;
+uniform int biome_category;
+uniform int biome_precipitation;
+uniform float rainfall;
+uniform float temperature;
+```
+
 # Shader Properties
 
 ## Particle ordering (Iris 1.5)
