@@ -5,7 +5,7 @@
 ## Table of Contents
 
 1. [New Programs](#new-programs)
-2. [Enhanced Custom Textures](#enhanced-custom-textures)
+2. [Enhanced Custom Textures](#enhanced-custom-textures-iris-15)
 3. [Defines / Feature Flags](#defines--feature-flags)
 4. [Uniforms](#uniforms)
 5. [Shader Properties](#shader-properties)
@@ -86,15 +86,15 @@ setup.csh
 setup_a.csh ... setup_z.csh
 ```
 
-# Enhanced Custom Textures
+# Enhanced Custom Textures (Iris 1.5)
 
 Instead of using the OptiFine format of replacing a color texture with a custom texture, you can define entirely custom textures to use in programs.
-This completely sidesteps the obsolete requirements of sacrificing a color texture. However, this does not change the amount of textures (16/32 depending on machine) you can use in a program at a given time.
+This completely sidesteps the obsolete requirements of sacrificing a color texture. However, this does not change the amount of textures (16/32 depending on machine) you can use in a program at a given time. Enhanced custom textures are avaliable from any program, similar to custom images.
 
 ### Example
 
 ```properties
-customTexture.name =<path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
+customTexture.name = <path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
 ```
 
 ```glsl
@@ -340,6 +340,21 @@ particles.ordering = mixed
 
 * `shaders.properties`
 
+## Explicit Shadow Pass Enable/Disable  (Iris 1.4.3)
+
+Normally Optifine/Iris will check if the shadow buffers are bound and used to determine when to enable/disable the shadow pass. Iris offers an additional explicit control for enabling/disabling the pass. Thic can be useful for voxelization which doesn't write to a shadowtex/shadowcolor buffer (for example SSBOs or custom images).
+
+### Declaration
+
+```
+shadow.enabled = true
+shadow.enabled = false
+```
+
+### Valid Declaration Locations
+
+* `shaders.properties`
+
 ## Entity shadow distance multiplier (Iris 1.2.1)
 
 This value controls the bounds for entity shadows to be rendered. By default, it is the value set for terrain. Any floating point number that is not 1 is multiplied by the terrain distance to get the final shadow distance multiplier.
@@ -363,36 +378,21 @@ const float entityShadowDistanceMul = 1.0f;
 * ✔️ Fragment Shader (*.fsh)
 
 
-## playerShadow directive (Iris 1.2.5)
+## shadowPlayer directive (Iris 1.2.5)
 
-This value controls if the player should have a shadow rendered. This is forced on if entityShadow (default true) is enabled.
+This value controls if the player should have a shadow rendered. This is forced on if shadowEntities (default true) is enabled.
 This also controls shadows of any entities the player is riding.
 
 ### Declaration
 
 ```
-playerShadow = true
+shadowPlayer = true
 ```
 
 ### Valid Declaration Locations
 
 * `shaders.properties`
 
-## Iris Custom Textures (Iris 1.5)
-
-Iris supports custom textures with unique sampler names. The syntax is identical to Optifine custom textures, except `<name>` must be different from any existing sampler, and no stage is specified as the sampler is avaliable to all programs. Iris Custom textures also support raw textures.
-
-### Declaration
-
-```
-customTexture.<name> = <path>
-
-customTexture.<name> = <path> <type> <internalFormat> <dimensions> <pixelFormat> <pixelType>
-```
-
-### Valid Declaration Locations
-
-* `shaders.properties`
 
 ## Concurrent Compute (Iris 1.4)
 
@@ -414,11 +414,11 @@ allowConcurrentCompute = true
 
 Iris hardcodes some custom entity ID's to detect specific things.
 
-`minecraft:entity_shadow`: The circular shadow under an entity when there is no shadow map.
-`minecraft:entity_flame`: The flame when an entity is on fire.
-`minecraft:zombie_villager_converting`: A zombie villager undergoing conversion.
-`minecraft:player_cape`: Player cape (without elytra).
-`minecraft:elytra_with_cape`: Player cape (with elytra).
+- `minecraft:entity_shadow`: The circular shadow under an entity when there is no shadow map.
+- `minecraft:entity_flame`: The flame when an entity is on fire.
+- `minecraft:zombie_villager_converting`: A zombie villager undergoing conversion.
+- `minecraft:player_cape`: Player cape (without elytra).
+- `minecraft:elytra_with_cape`: Player cape (with elytra).
 
 # Item and Armor Detection
 
@@ -478,6 +478,12 @@ Separate hardware shadow samplers can be enabled using the [feature flag](#featu
 When enabled and shadow hardware filtering is enabled via the hardware constant, `shadowtex0` and `shadowtex1` will no longer function as hardware samplers.
 
 Instead, you can use `shadowtex0HW` and `shadowtex1HW` to sample using hardware shadow filtering and software at the same time
+
+# Extended Shadowcolor
+
+If the [Feature Flag](#feature-flags) for extended shadowcolor is set, `shadowcolor2` through `shadowcolor7` is enabled.
+
+These can be drawn to via `DRAWBUFFERS` or `RENDERTARGETS` in the shadow pass or shadow composites.
 
 # Shader Storage Buffer Objects
 
@@ -575,9 +581,3 @@ void main() {
     gl_FragColor = texture2D(cSampler1, gl_FragCoord.xy / vec2(viewWidth, viewHeight)); // Samples the current pixel of the image with smooth linear filtering.
 }
 ```
-
-# Extended Shadowcolor
-
-If the [Feature Flag](#feature-flags) for extended shadowcolor is set, `shadowcolor2` through `shadowcolor7` is enabled.
-
-These can be drawn to via `DRAWBUFFERS` or `RENDERTARGETS` in the shadow pass or shadow composites.
