@@ -23,6 +23,26 @@
 
 # New Programs
 
+## Terrain Solid (Iris 1.6)
+
+This program renders all solid terrain, that is terrain with no transparency or cutouts. When using a core profile you can safely avoid using `discard` in this program, which preserves early z testing.
+
+### Declaration
+
+```
+gbuffers_terrain_solid
+```
+
+## Terrain Cutout (Iris 1.6)
+
+This program renders all cutout terrain, that is terrain with cutouts and no other transparency. When using core profile, `discard` should be used below a threshold alpha to achieve the cutout.
+
+### Declaration
+
+```
+gbuffers_terrain_cutout
+```
+
 ## Entity Translucent (Iris 1.5)
 
 This program renders all entities that are marked translucent and have blending enabled. If this program is not used, all entities will be rendered with `gbuffers_entities`.
