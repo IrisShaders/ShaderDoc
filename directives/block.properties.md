@@ -26,13 +26,13 @@ layer.translucent=<blocks>
 #### Example
 
 ```
-# Disable clouds with this shader pack
-clouds=fancy
+# Change Stone To A Translucent Block
+layer.translucent=stone
 ```
 
 #### Default
 
-No change. If this option is not present then the clouds render in the way that the user has chosen.
+No change. If this option is not present then the blocks render in the way that mojang has chosen.
 
 #### Implementation Support
 
