@@ -14,6 +14,15 @@
 
 Layer Changes allow you to change what layer a block renders on.
 
+#### Representation
+
+```java
+layer.solid=<blocks>
+layer.cutout=<blocks>
+layer.cutout_mipped=<blocks>
+layer.translucent=<blocks>
+```
+
 #### Implementation Support
 
 * ❌ ShadersMod
