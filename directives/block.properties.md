@@ -8,7 +8,7 @@
 
 ## Block Rendering Options
 
-### Layer Changes
+### Render Layer Changes
 
 Layer Changes allow you to change what layer a block renders on.
 
