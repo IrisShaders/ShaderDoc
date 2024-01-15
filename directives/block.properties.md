@@ -23,6 +23,17 @@ layer.cutout_mipped=<blocks>
 layer.translucent=<blocks>
 ```
 
+#### Example
+
+```
+# Disable clouds with this shader pack
+clouds=fancy
+```
+
+#### Default
+
+No change. If this option is not present then the clouds render in the way that the user has chosen.
+
 #### Implementation Support
 
 * ❌ ShadersMod
