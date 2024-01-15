@@ -8,8 +8,6 @@
 
 ## Block Rendering Options
 
-### MC_Entity
-
 ### Layer Changes
 
 Layer Changes allow you to change what layer a block renders on.
