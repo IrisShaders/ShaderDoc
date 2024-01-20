@@ -5,6 +5,7 @@
 1. [Definitions/Properties](#definitionsproperties)
 2. [Samplers/Uniforms](#samplersuniforms)
 3. [Programs](#programs)
+4. [Block ID's](#block-ids)
 
 # Definitions/Properties
 
@@ -80,6 +81,7 @@ The following attributes are supported in DH programs:
 `gl_MultiTexCoord2`
 `gl_Normal`
 `gl_Color`
+`dhMaterialId`
 
 The following built in uniforms are supported:
 
@@ -99,3 +101,26 @@ Water gets the program `dh_water`.  This runs **after** normal water.
 
 Shadow pass gets the program `dh_shadow`. This runs before shadow terrain and shadow water respectively. **The shadow pass retains the normal textures and projection.**
 
+# Block ID's
+
+**Normal block ID's (mc_Entity) are not supported.**
+
+Iris provides "mini-IDs" in the form of `int dhMaterialId` automatically declared.
+
+Here are all possible Mini-ID's.
+
+1. Unknown
+2. Leaves
+3. Stone-related items
+4. Wooden items
+5. Copper items
+6. Dirt/Grass
+7. Lava
+8. Deepslate
+9. Snow
+10. Sand/Red Sand
+11. Terracotta
+12. Natural nether blocks (Netherrack)
+13. Unused
+14. Unused
+15. Unknown blocks that emit light
