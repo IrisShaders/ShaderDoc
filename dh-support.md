@@ -121,7 +121,7 @@ Here are all possible Mini-ID's.
 9. Sand/Red Sand 
 10. Terracotta 
 11. Natural nether blocks (Netherrack)
-12. Unused 
+12. Water 
 13. Unused 
 14. Unused 
 15. Unknown blocks that emit light
