@@ -109,18 +109,19 @@ Iris provides "mini-IDs" in the form of `int dhMaterialId` automatically declare
 
 Here are all possible Mini-ID's.
 
-1. Unknown
-2. Leaves
-3. Stone-related items
-4. Wooden items
-5. Copper items
-6. Dirt/Grass
-7. Lava
-8. Deepslate
-9. Snow
-10. Sand/Red Sand
-11. Terracotta
-12. Natural nether blocks (Netherrack)
-13. Unused
-14. Unused
-15. Unknown blocks that emit light
+0. Unknown
+1. Leaves
+2. Stone-related items
+3. Wooden items
+4. Copper items 
+5. Dirt/Grass 
+6. Lava 
+7. Deepslate 
+8. Snow 
+9. Sand/Red Sand 
+10. Terracotta 
+11. Natural nether blocks (Netherrack)
+12. Unused 
+13. Unused 
+14. Unused 
+14. Unknown blocks that emit light
