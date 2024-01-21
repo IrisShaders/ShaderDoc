@@ -124,4 +124,4 @@ Here are all possible Mini-ID's.
 12. Unused 
 13. Unused 
 14. Unused 
-14. Unknown blocks that emit light
+15. Unknown blocks that emit light
