@@ -107,21 +107,22 @@ Shadow pass gets the program `dh_shadow`. This runs before shadow terrain and sh
 
 Iris provides "mini-IDs" in the form of `int dhMaterialId` automatically declared.
 
-Here are all possible Mini-ID's.
+All Mini-ID's get their own definitions that can be used in any program.
 
-0. Unknown
-1. Leaves
-2. Stone-related items
-3. Wooden items
-4. Copper items 
-5. Dirt/Grass 
-6. Lava 
-7. Deepslate 
-8. Snow 
-9. Sand/Red Sand 
-10. Terracotta 
-11. Natural nether blocks (Netherrack)
-12. Water 
-13. Unused 
-14. Unused 
-15. Unknown blocks that emit light
+```text
+DH_BLOCK_UNKNOWN // Any block not in this list that does not emit light
+DH_BLOCK_LEAVES // All types of leaves, bamboo, or cactus
+DH_BLOCK_STONE // Stone or ore
+DH_BLOCK_WOOD // Any wooden item
+DH_BLOCK_METAL // Any block that emits a metal or copper sound.
+DH_BLOCK_DIRT // Dirt, grass, podzol, and coarse dirt.
+DH_BLOCK_LAVA // Lava.
+DH_BLOCK_DEEPSLATE // Deepslate, and all it's forms.
+DH_BLOCK_SNOW // Snow.
+DH_BLOCK_SAND // Sand and red sand.
+DH_BLOCK_TERRACOTTA // Terracotta.
+DH_BLOCK_NETHER_STONE // Blocks that have the "base_stone_nether" tag.
+DH_BLOCK_WATER // Water...
+DH_BLOCK_AIR // Air. This should never be accessible/used.
+DH_BLOCK_ILLUMINATED // Any block not in this list that emits light
+```
