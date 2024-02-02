@@ -95,7 +95,7 @@ Terrain gets the program `dh_terrain`. This runs before normal terrain.
 
 ### Water
 
-Water gets the program `dh_water`.  This runs **after** normal water.
+Water gets the program `dh_water`.  This runs **before** normal water.
 
 ### Shadow
 
