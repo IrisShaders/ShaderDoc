@@ -129,7 +129,8 @@ You can check for the define `IS_IRIS` to check for Iris support.
 
 ## Feature Flags
 
-Feature flags are a new system in Iris to query the existence of certain features. To activate them use `iris.features.required` to show an error if your PC or Iris doesn't support a feature, or use `iris.features.optional` to get a define with the feature name `IRIS_FEATURE_X` if the feature is supported.
+Feature flags are a new system in Iris to query the existence of certain features. To activate them use `iris.features.required` to show an error if your PC or Iris doesn't support a feature, or use `iris.features.optional` to get a define with the feature name `IRIS_FEATURE_X` if the feature is supported.  
+If one wants to activate multiple feature flags, one has to add them in the same line separted by space `iris.features.required/optional = FEATURE_FLAG_A FEATURE_FLAG_B`
 
 The currently added feature flags are:
 
@@ -148,6 +149,8 @@ The currently added feature flags are:
 `HIGHER_SHADOWCOLOR` (required for [Extended Shadowcolor](#extended-shadowcolor))
 
 `REVERSED_CULLING` (recommended, but not required for [Reverse Shadow Culling](#reversed-shadow-culling-iris-166))
+
+`BLOCK_EMISSION_ATTRIBUTE` (recommended, but not required for [Block Emission: at_midBlock.w] as of [iris-1.7.0-snapshotmc1.20.4-a787322])
 
 # Uniforms
 
@@ -297,15 +300,15 @@ uniform int currentColorSpace;
 
 These uniforms are used to identify and read aspects of the biome the player is currently in. These uniforms are defined the same as when using custom uniforms with these variables.
 
-`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
+`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom uniforms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
 
-`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms, the following are recognized:
+`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom uniforms, the following are recognized:
 
 `CAT_NONE`, `CAT_TAIGA`, `CAT_EXTREME_HILLS`, `CAT_JUNGLE`, `CAT_MESA`, `CAT_PLAINS`, `CAT_SAVANNA`, `CAT_ICY`, `CAT_THE_END`, `CAT_BEACH`, `CAT_FOREST`, `CAT_OCEAN`, `CAT_DESERT`, `CAT_RIVER`, `CAT_SWAMP`, `CAT_MUSHROOM`, `CAT_NETHER`
 
 `biome_precipitation` tells what type of precipitation occurs in this biome. 0 is no precipitation, 1 is rain, 2 is snow. The following defines can also be used: `PPT_NONE`, `PPT_RAIN`, `PPT_SNOW`.
 
-`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally, and range in value form 0 to 1.
+`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally. In vanilla Minecraft this will range in value from -0.7 to 2.0, however mods may have values outside that range. For more information, see the [Minecraft Wiki](https://minecraft.wiki/w/Biome).
 
 ### Declaration
 ```glsl

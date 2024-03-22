@@ -2,8 +2,210 @@
 
 ## Table of Contents
 
-1. [Ambient occlusion level](#ambient-occlusion-level)
+1. [Texture Format](#texture-format)
+2. [Texture Clear](#texture-clear)
+3. [Texture Mipmaps](#texture-mipmaps)
+4. [Shadow Texture Mipmaps](#shadow-texture-mipmaps)
+5. [Instance Count](#instance-count)
+6. [Ambient occlusion level](#ambient-occlusion-level)
+7. [Super sampling level](#super-sampling-level)
 
+## Texture Format
+
+This directive allows a shader pack to specify the format and precision of a colortex or shadowcolor color attachment.
+
+The available texture formats are as follows:
+
+#### Normalized
+
+Normalized buffers can store "floating point" values in a fixed range, between 0.0 and 1.0 (inclusive).  The values are not actually stored as floating point internally, but as an integer value. However, the result is converted to a floating point during read/write to a color attachment using a normalized format, so the shader will read/write floating point values to the attachments, however any values outside of the range will be clamped to fit in the range.
+
+| 8-bit | 16-bit | mixed    |
+| ----- | ------ | -------- |
+| R8    | R16    | RGB5_A1  |
+| RG8   | RG16   | RGB10_A2 |
+| RGB8  | RGB16  |          |
+| RGBA8 | RGBA16 |          |
+
+#### Signed Normalized
+
+Signed Normalized buffers are identical to normalized buffers, however the range they can represent is expanded to -1 to 1 inclusive, allowing them to store negative values.
+
+| 8-bit       | 16-bit       |
+| ----------- | ------------ |
+| R8_SNORM    | R16_SNORM    |
+| RG8_SNORM   | RG16_SNORM   |
+| RGB8_SNORM  | RGB16_SNORM  |
+| RGBA8_SNORM | RGBA16_SNORM |
+
+#### Floating Point
+
+Floating point buffers allow the attachment to store full floating point values. They are only available with larger than default precision due to the store needed for floating point values. However they offer a significantly larger range of storage, allowing the storing of HDR values.
+
+The `RGB9_E5` format uses a 5-bit exponent for all three terms (R, G, and B), where each component has a 9 bit mantissa. This allows significantly more precision than the `R11F_G11F_B10F`, which only has 6 to 5 bits of precision per component, however `R11F_G11F_B10F` has individual exponents for each component.
+
+| 16-bit  | 32-bit  | mixed          |
+| ------- | ------- | -------------- |
+| R16F    | R32F    | RGB9_E5        |
+| RG16F   | RG32F   | R11F_G11F_B10F |
+| RGB16F  | RGB32F  |                |
+| RGBA16F | RGBA32F |                |
+
+#### Signed Integer
+
+Signed Integer buffers allow storing signed integers, just like the tin says. These are standard two's complement integers, which means they can store negative values.
+
+| 8-bit  | 16-bit  | 32-bit  |
+| ------ | ------- | ------- |
+| R8I    | R16I    | R32I    |
+| RG8I   | RG16I   | RG32I   |
+| RGB8I  | RGB16I  | RGB32I  |
+| RGBA8I | RGBA16I | RGBA32I |
+
+#### Unsigned Integer
+
+Unsigned Integer buffers allow storing of unsigned integers, which will not be interpreted as negative values (although they can technically be cast to signed integers). As such they do not directly allow the storage of negative integers, but have double the range of their signed cousins in the positive domain.
+
+| 8-bit   | 16-bit   | 32-bit   |
+| ------- | -------- | -------- |
+| R8UI    | R16UI    | R32UI    |
+| RG8UI   | RG16UI   | RG32UI   |
+| RGB8UI  | RGB16UI  | RGB32UI  |
+| RGBA8UI | RGBA16UI | RGBA32UI |
+
+
+This directive only needs to be defined once in the shader pack, can can be defined in (mostly) any shader file. Because the format names are not defined as part of glsl, the directive must either be put in a block comment, or the format name must be otherwise manually defined to any value to avoid compilation errors. Do not put the directive in a single line comment, or have any other text in the line of the directive, as this may cause it to not be detected properly.
+
+### Declaration
+
+Scope: Entire Pack
+
+```glsl
+/*
+const int <bufferName>Format = <format>;
+
+Ex:
+const int colortex4Format = RGB9_E5;
+*/
+```
+
+### Valid Declaration Locations
+
+* ❌ Vertex Shader (*.vsh)
+* ❌ Geometry Shader (*.gsh)
+* ✔️ Fragment Shader (*.fsh)
+
+### Implementation Support
+
+* ❓ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+## Texture Clear
+
+This Clear directive allows a shader pack to disable clearing for a colortex or shadowcolor color attachment. This means that the values written to the texture will be retained through the next frame instead of being cleared after every frame.
+
+The ClearColor directive is only used when clearing is enabled, and it defined the values stored in the buffer during the clear operation. By default, all colortex buffers are cleared to 0s (black), except colortex0, which is cleared to the current fog color, and colortex1, which is cleared to white. All shadowcolor buffers are cleared with white by default. This directive allows changing this clear color for each attachment.
+
+Both of these directives only need to be defined once in the shader pack, can can be defined in (mostly) any shader file.
+
+### Declaration
+
+Scope: Entire Pack
+
+```glsl
+const bool <bufferName>Clear = false;
+const vec4 <bufferName>ClearColor = <value>;
+```
+
+### Value Range
+
+* Clear
+	* Possible Values: true/false
+	* Default Value: false
+	* Out-of-range values behavior: default value (false)
+* ClearColor
+	* Possible Values: true/false
+	* Default Value: vec4(0.0, 0.0, 0.0, 0.0)
+	* Out-of-range values behavior: default value
+
+### Valid Declaration Locations
+
+* ❌ Vertex Shader (*.vsh)
+* ❌ Geometry Shader (*.gsh)
+* ✔️ Fragment Shader (*.fsh)
+
+### Implementation Support
+
+* ❓ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+## Texture Mipmaps
+
+This directive allows shaders to generate a mipmap chain for a colortex attachment. The mipmap chain will be generated before any program where the directive is included, if there are multiple programs it will be re-generated before each program containing the directive. This directive is only valid for composite, deferred, and final programs.
+
+### Declaration
+
+Scope: Per-program
+
+```glsl
+const bool <bufferName>MipmapEnabled = true;
+```
+
+### Value Range
+
+* Possible Values: true/false
+* Default Value: false
+* Out-of-range values behavior: default value (false)
+
+### Valid Declaration Locations
+
+* ❌ Vertex Shader (*.vsh)
+* ❌ Geometry Shader (*.gsh)
+* ✔️ Fragment Shader (*.fsh)
+
+### Implementation Support
+
+* ❓ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+## Shadow Texture Mipmaps
+
+There are several directives for enabling mipmaps for shadow buffers, including shadowtex and shadowcolor attachments. These directives only need to be included once, as after the shadow pass no other programs can write to shadow attachments. The mipmaps are not accessible during the shadow pass.
+
+`shadowtexMipmap` is equivalent to `shadowtex0Mipmap`, only enabling mipmaps on shadowtex0. The other directives enable mipmaps on only the specific attachment listed in the name.
+
+### Declaration
+
+Scope: Entire Pack
+
+```glsl
+const bool shadowtexMipmap = true;
+const bool shadowtex0Mipmap = true;
+const bool shadowtex1Mipmap = true;
+const bool shadowcolor0Mipmap = true;
+const bool shadowcolor1Mipmap = true;
+```
+
+### Value Range
+
+* Possible Values: true/false
+* Default Value: false
+* Out-of-range values behavior: default value (false)
+
+### Valid Declaration Locations
+
+* ❌ Vertex Shader (*.vsh)
+* ❌ Geometry Shader (*.gsh)
+* ✔️ Fragment Shader (*.fsh)
+
+### Implementation Support
+
+* ❓ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
 ## Instance count
 
 This directive allows a shader pack to enable a form of instanced rendering for a given program. Shaders may read the instanceId uniform in order to figure out what instance is currently being rendered. For the first instance, instanceId will be zero, and for all other instances, it will be a non-zero value corresponding to the instance index. So instance 0 will be drawn, then 1, then 2, etc.
@@ -122,3 +324,5 @@ const int superSamplingLevel = 1;
 ### Implementation Details
 
 ShadersMod and OptiFine both appear to contain stub supporting code for this feature, but neither one actually enables super sampling when requested through this directive.
+ supporting code for this feature, but neither one actually enables super sampling when requested through this directive.
+ither one actually enables super sampling when requested through this directive.
