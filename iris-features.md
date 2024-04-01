@@ -149,6 +149,8 @@ The currently added feature flags are:
 
 `REVERSED_CULLING` (recommended, but not required for [Reverse Shadow Culling](#reversed-shadow-culling-iris-166))
 
+`BLOCK_EMISSION_ATTRIBUTE` (recommended, but not required for [Block Emission: at_midBlock.w] as of [iris-1.7.0-snapshotmc1.20.4-a787322])
+
 # Uniforms
 
 ## Lightning bolt position (Iris 1.2.5)
