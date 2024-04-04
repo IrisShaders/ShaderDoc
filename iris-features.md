@@ -129,7 +129,8 @@ You can check for the define `IS_IRIS` to check for Iris support.
 
 ## Feature Flags
 
-Feature flags are a new system in Iris to query the existence of certain features. To activate them use `iris.features.required` to show an error if your PC or Iris doesn't support a feature, or use `iris.features.optional` to get a define with the feature name `IRIS_FEATURE_X` if the feature is supported.
+Feature flags are a new system in Iris to query the existence of certain features. To activate them use `iris.features.required` to show an error if your PC or Iris doesn't support a feature, or use `iris.features.optional` to get a define with the feature name `IRIS_FEATURE_X` if the feature is supported.  
+If one wants to activate multiple feature flags, one has to add them in the same line separted by space `iris.features.required/optional = FEATURE_FLAG_A FEATURE_FLAG_B`
 
 The currently added feature flags are:
 
