@@ -107,7 +107,7 @@ This Clear directive allows a shader pack to disable clearing for a colortex or 
 
 The ClearColor directive is only used when clearing is enabled, and it defined the values stored in the buffer during the clear operation. By default, all colortex buffers are cleared to 0s (black), except colortex0, which is cleared to the current fog color, and colortex1, which is cleared to white. All shadowcolor buffers are cleared with white by default. This directive allows changing this clear color for each attachment.
 
-Currently the only option for setting clear color is with a vec4 value. If the buffer stores less than four components, the leftmost components will be used and the rest discarded. For integer buffers, any positive value will be stored as the maximum positive integer, 0.0 will be stored as 0, and for signed integer buffers any negative value will be stored as the largest magnitude negative number.
+Currently the only option for setting clear color is with a vec4 value. If the buffer stores less than four components, the leftmost components will be used and the rest discarded. For integer buffers, the bits of the float value will be intepreted as a 32-bit integer (not converted, but directly intepreted) and used as the clear color. For 16 and 8 bit buffers, any value outside the range will be clamped to the maximum or minimum value depending if it's beyond the positive or negative bound.
 
 Both of these directives only need to be defined once in the shader pack, and can be defined in (mostly) any shader file.
 
