@@ -109,7 +109,7 @@ The ClearColor directive is only used when clearing is enabled, and it defined t
 
 Currently the only option for setting clear color is with a vec4 value. If the buffer stores less than four components, the leftmost components will be used and the rest discarded. For integer buffers, any positive value will be stored as the maximum positive integer, 0.0 will be stored as 0, and for signed integer buffers any negative value will be stored as the largest magnitude negative number.
 
-Both of these directives only need to be defined once in the shader pack, can can be defined in (mostly) any shader file.
+Both of these directives only need to be defined once in the shader pack, and can be defined in (mostly) any shader file.
 
 ### Declaration
 
