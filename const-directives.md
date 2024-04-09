@@ -159,7 +159,7 @@ const bool <bufferName>MipmapEnabled = true;
 
 * Possible Values: true/false
 * Default Value: false
-* Out-of-range values behavior: default value (false)
+* Out-of-range values behavior: ignored (warning logged)
 
 ### Valid Declaration Locations
 
