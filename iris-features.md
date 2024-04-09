@@ -484,6 +484,8 @@ Setting `shadow.culling = reversed` in shaders.properties will create an area ar
 
 Using `voxelizeLightBlocks` in shaders.properties, you can now voxelize light blocks in the shadow or main pass.
 
+This only applies to light blocks ([Minecraft Wiki](https://minecraft.wiki/w/Light_Block)), which are a specific block which is invisible but emits a specific level of light. This does not affect any other blocks or geometry.
+
 Light blocks will be rendered as a single (degenerate) invisible quad with all points centered on the middle of the block. (`at_midBlock` will be 0.) The ID will correspond as normal to the light block,
 and UV will be 0. `lmcoord.xy` will both be the value of the light made by the light block.
 
