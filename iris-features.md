@@ -279,7 +279,7 @@ uniform bool is_burning;
 
 ## Player is on ground (Iris 1.6.5)
 
-This boolean uniform is `true` when the player is not flying is an on the ground, and `false` otherwise.
+This boolean uniform is `true` when the player is not flying and is on the ground, and `false` otherwise.
 
 ### Declaration
 
