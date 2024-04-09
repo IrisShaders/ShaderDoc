@@ -324,5 +324,3 @@ const int superSamplingLevel = 1;
 ### Implementation Details
 
 ShadersMod and OptiFine both appear to contain stub supporting code for this feature, but neither one actually enables super sampling when requested through this directive.
- supporting code for this feature, but neither one actually enables super sampling when requested through this directive.
-ither one actually enables super sampling when requested through this directive.
