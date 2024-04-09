@@ -107,7 +107,7 @@ This Clear directive allows a shader pack to disable clearing for a colortex or 
 
 The ClearColor directive is only used when clearing is enabled, and it defined the values stored in the buffer during the clear operation. By default, all colortex buffers are cleared to 0s (black), except colortex0, which is cleared to the current fog color, and colortex1, which is cleared to white. All shadowcolor buffers are cleared with white by default. This directive allows changing this clear color for each attachment.
 
-Both of these directives only need to be defined once in the shader pack, can can be defined in (mostly) any shader file.
+Both of these directives only need to be defined once in the shader pack, and can can be defined in (mostly) any shader file.
 
 ### Declaration
 
