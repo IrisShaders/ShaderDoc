@@ -42,7 +42,7 @@ Signed Normalized buffers are identical to normalized buffers, however the range
 
 Floating point buffers allow the attachment to store full floating point values. They are only available with larger than default precision due to the store needed for floating point values. However they offer a significantly larger range of storage, allowing the storing of HDR values.
 
-The `RGB9_E5` format uses a 5-bit exponent for all three terms (R, G, and B), where each component has a 9 bit mantissa. This allows significantly more precision than the `R11F_G11F_B10F`, which only has 6 to 5 bits of precision per component, however `R11F_G11F_B10F` has individual exponents for each component.
+The `RGB9_E5` format uses a 5-bit exponent for all three terms (R, G, and B), where each component has a 9 bit mantissa. This allows significantly more precision than the `R11F_G11F_B10F`, which only has 6 to 5 bits of precision per component, however `R11F_G11F_B10F` has individual exponents for each component. For more information on these format types, see the [OpenGL Wiki](https://www.khronos.org/opengl/wiki/Small_Float_Formats)
 
 | 16-bit  | 32-bit  | mixed          |
 | ------- | ------- | -------------- |
@@ -107,6 +107,8 @@ This Clear directive allows a shader pack to disable clearing for a colortex or 
 
 The ClearColor directive is only used when clearing is enabled, and it defined the values stored in the buffer during the clear operation. By default, all colortex buffers are cleared to 0s (black), except colortex0, which is cleared to the current fog color, and colortex1, which is cleared to white. All shadowcolor buffers are cleared with white by default. This directive allows changing this clear color for each attachment.
 
+Currently the only option for setting clear color is with a vec4 value. If the buffer stores less than four components, the leftmost components will be used and the rest discarded. For integer buffers, any positive value will be stored as the maximum positive integer, 0.0 will be stored as 0, and for signed integer buffers any negative value will be stored as the largest magnitude negative number.
+
 Both of these directives only need to be defined once in the shader pack, can can be defined in (mostly) any shader file.
 
 ### Declaration
@@ -125,7 +127,7 @@ const vec4 <bufferName>ClearColor = <value>;
 	* Default Value: false
 	* Out-of-range values behavior: default value (false)
 * ClearColor
-	* Possible Values: true/false
+	* Possible Values: vec4(\<r\>, \<g\>, \<b\>, \<a\>)
 	* Default Value: vec4(0.0, 0.0, 0.0, 0.0)
 	* Out-of-range values behavior: default value
 

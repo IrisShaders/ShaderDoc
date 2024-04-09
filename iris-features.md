@@ -111,6 +111,8 @@ setup_a.csh ... setup_z.csh
 Instead of using the OptiFine format of replacing a color texture with a custom texture, you can define entirely custom textures to use in programs.
 This completely sidesteps the obsolete requirements of sacrificing a color texture. However, this does not change the amount of textures (16/32 depending on machine) you can use in a program at a given time. Enhanced custom textures are avaliable from any program, similar to custom images.
 
+Just like the Optifine format, enhanced custom textures can load textures from the shader pack directory, the resource pack, or dynamic textures such as a texture atlas or lightmap. These follow the same syntax as in Optifine.
+
 ### Example
 
 ```properties
