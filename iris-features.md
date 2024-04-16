@@ -111,6 +111,8 @@ setup_a.csh ... setup_z.csh
 Instead of using the OptiFine format of replacing a color texture with a custom texture, you can define entirely custom textures to use in programs.
 This completely sidesteps the obsolete requirements of sacrificing a color texture. However, this does not change the amount of textures (16/32 depending on machine) you can use in a program at a given time. Enhanced custom textures are avaliable from any program, similar to custom images.
 
+Just like the Optifine format, enhanced custom textures can load textures from the shader pack directory, the resource pack, or dynamic textures such as a texture atlas or lightmap. These follow the same syntax as in Optifine.
+
 ### Example
 
 ```properties
@@ -300,15 +302,15 @@ uniform int currentColorSpace;
 
 These uniforms are used to identify and read aspects of the biome the player is currently in. These uniforms are defined the same as when using custom uniforms with these variables.
 
-`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
+`biome` identifies the biome currently occupied by the player. It's value can be compared with the same predefined constants as custom uniforms using biome, for example: `BIOME_PLAINS`, `BIOME_RIVER`, `BIOME_DESERT`, `BIOME_SWAMP`, etc.
 
-`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom unfiorms, the following are recognized:
+`biome_category` identifies the biome category currently occupied by the player. It's value can be compared with the same predefined constants as custom uniforms, the following are recognized:
 
 `CAT_NONE`, `CAT_TAIGA`, `CAT_EXTREME_HILLS`, `CAT_JUNGLE`, `CAT_MESA`, `CAT_PLAINS`, `CAT_SAVANNA`, `CAT_ICY`, `CAT_THE_END`, `CAT_BEACH`, `CAT_FOREST`, `CAT_OCEAN`, `CAT_DESERT`, `CAT_RIVER`, `CAT_SWAMP`, `CAT_MUSHROOM`, `CAT_NETHER`
 
 `biome_precipitation` tells what type of precipitation occurs in this biome. 0 is no precipitation, 1 is rain, 2 is snow. The following defines can also be used: `PPT_NONE`, `PPT_RAIN`, `PPT_SNOW`.
 
-`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally, and range in value form 0 to 1.
+`rainfall` and `temperature` measure aspects of the biome as defined by Minecraft internally. In vanilla Minecraft this will range in value from -0.7 to 2.0, however mods may have values outside that range. For more information, see the [Minecraft Wiki](https://minecraft.wiki/w/Biome).
 
 ### Declaration
 ```glsl
@@ -483,6 +485,8 @@ Setting `shadow.culling = reversed` in shaders.properties will create an area ar
 # Light Block Voxelization
 
 Using `voxelizeLightBlocks` in shaders.properties, you can now voxelize light blocks in the shadow or main pass.
+
+This only applies to light blocks ([Minecraft Wiki](https://minecraft.wiki/w/Light_Block)), which are a specific block which is invisible but emits a specific level of light. This does not affect any other blocks or geometry.
 
 Light blocks will be rendered as a single (degenerate) invisible quad with all points centered on the middle of the block. (`at_midBlock` will be 0.) The ID will correspond as normal to the light block,
 and UV will be 0. `lmcoord.xy` will both be the value of the light made by the light block.
