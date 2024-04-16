@@ -677,11 +677,11 @@ uniform float near;
 * ✔️ Iris
 
 
-### Far viewing plane
+### "Far Viewing Plane"
 
 ShadersMod and OptiFine set this value to the render distance in blocks / meters. 
 
-However, the `GameRenderer#applyCameraTransformations` method in yarn-mapped Minecraft actually sets the far plane to the render distance in blocks times the square root of 2.
+The real far plane used by rendering is 4 times the size of this in Minecraft 1.17 and higher.
 
 #### Declaration
 
