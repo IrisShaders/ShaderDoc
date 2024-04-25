@@ -6,6 +6,49 @@
 * ✔️ OptiFine
 * ✔️ Iris
 
+## Custom Textures
+
+### Registering
+
+Custom Textures allow you to create a custom texture2D sampler, allowing you to use them.
+
+#### Representation
+
+```java
+customTexture.<name> = <path>
+```
+
+Paths use the root folder of shaders
+
+#### Example
+
+```
+# Addded A LUT for Sunlight with the texture in shaders/textures
+customTexture.sunlightLUT = textures/sunlightLUT.png
+```
+
+#### Usage
+
+```
+#In an fsh file, using the example above
+uniform sampler2D sunlightLUT; // The Sunlight LUT
+
+#Gets the color at 0.5, 0
+vec4 color = vec4(texture(sunlightLUT, vec2(0.5, 0)), 1.0)
+```
+
+#### Default
+
+No change. If this option is not present, then no custom samplers are present.
+
+#### Implementation Support
+
+* ❌ ShadersMod
+* ✔️ OptiFine
+* ✔️ Iris
+
+Note: Optifine has diffrent syntax.
+
 ## Rendering detail toggles
 
 ### Clouds mode
