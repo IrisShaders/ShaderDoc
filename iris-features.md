@@ -289,6 +289,16 @@ This boolean uniform is `true` when the player is not flying and is on the groun
 uniform bool is_on_ground;
 ```
 
+## Player uses right-handed mode (Iris 1.7)
+
+This boolean uniform is `true` when the player is using the right hand (default) as the main hand and `false` when the left hand is set as the main hand through the vanilla settings.
+
+### Declaration
+
+```glsl
+uniform bool isRightHanded;
+```
+
 ## Color Space Uniforms (Iris 1.6.4)
 
 This value reads the color space used when displaying to the screen. 0 is sRGB, 1 is DCI_P3, 2 is Display P3, 3 is REC2020, 4 is Adobe RGB.
