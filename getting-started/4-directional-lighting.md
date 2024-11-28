@@ -25,7 +25,7 @@ void main() {
     
     // 0.2 will be the *minimum* light for objects facing away from the sun. You can mess with this value.
     // The sun/moon position must be normalized.
-    float NdotL = max(0.2, dot(normal, normalize(shadowLightPosition));
+    float NdotL = max(0.2, dot(normal, normalize(shadowLightPosition)));
     
     finalColor.rgb *= NdotL;
 }
