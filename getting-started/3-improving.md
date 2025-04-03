@@ -56,7 +56,7 @@ void main() {
     vec4 lightColor = texture(lightmap, lightCoord);
     
     // Calculate our new fog color!
-    float fogValue = vertexPosition < fogEnd ? smoothstep(fogStart, fogEnd, vertexPosition) : 1.0;
+    float fogValue = vertexDistance < fogEnd ? smoothstep(fogStart, fogEnd, vertexDistance) : 1.0;
 
     vec4 finalColor = texColor * lightColor * vertexColor;
     pixelColor = vec4(mix(finalColor.xyz, fogColor, fogValue), finalColor.a);
